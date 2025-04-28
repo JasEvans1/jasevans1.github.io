@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VV Anthems | Jasper Evangelista</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #0a0a0a; /* Dark background like homepage */
+      color: #fff; /* Default text color to white */
+      min-height: 100vh;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 4vw;
+      /* Green/Aqua gradient for header */
+      background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 24px #185a9d33;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      text-shadow: 0 2px 12px #43cea2aa;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #43cea2; /* Aqua hover color */
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(24, 24, 24, 0.8); /* Darker container background */
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    h1 {
+      text-align: center;
+      color: #43cea2; /* Aqua heading color */
+      margin-bottom: 2rem;
+      text-shadow: 0 2px 12px #43cea255;
+    }
+    .song-list {
+      list-style: none;
+      padding: 0;
+    }
+    .song-item {
+      background: rgba(0,0,0,0.4); /* Darker song item background */
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border-left: 4px solid #185a9d; /* Accent border */
+    }
+    .song-item h3 {
+      margin: 0 0 0.5rem 0;
+      color: #eee;
+      font-size: 1.2rem;
+    }
+    audio {
+      width: 100%;
+      border-radius: 5px;
+      filter: invert(1) hue-rotate(180deg); /* Invert colors for dark mode */
+    }
+    /* Optional: More specific styling for audio player controls if needed */
+    audio::-webkit-media-controls-panel {
+       background-color: #333; /* Darker panel */
+    }
+    audio::-webkit-media-controls-play-button,
+    audio::-webkit-media-controls-current-time-display,
+    audio::-webkit-media-controls-time-remaining-display,
+    audio::-webkit-media-controls-mute-button,
+    audio::-webkit-media-controls-volume-slider {
+       color: #eee; /* Light controls */
+       filter: none; /* Remove previous filter if applying specific colors */
+    }
+     audio::-webkit-media-controls-timeline {
+       background-color: #555; /* Darker timeline */
+       border-radius: 5px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+    .footer a {
+      color: #43cea2; /* Aqua link color */
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        margin-top: 1rem;
+      }
+      nav a {
+        margin-left: 0;
+        margin-right: 1rem;
+      }
+      .song-item {
+        padding: 0.8rem 1rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">Jasper Evangelista</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <!-- Add other nav links from your index.html if desired -->
+      <a href="vv-anthems.html">VV Anthems</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Viral Vocab Anthems</h1>
+    <ul class="song-list">
+      <li class="song-item">
+        <h3>Abtribute</h3>
+        <audio controls src="vv-anthems/Abtribute Song.mp3">Your browser does not support the audio element.</audio>
+      </li>
+      <li class="song-item">
+        <h3>Brandsonify</h3>
+        <audio controls src="vv-anthems/Brandsonify Song.mp3">Your browser does not support the audio element.</audio>
+      </li>
+      <li class="song-item">
+        <h3>Convertent</h3>
+        <audio controls src="vv-anthems/Convertent Song.mp3">Your browser does not support the audio element.</audio>
+      </li>
+      <li class="song-item">
+        <h3>Datograph</h3>
+        <audio controls src="vv-anthems/Datograph Song.mp3">Your browser does not support the audio element.</audio>
+      </li>
+      <li class="song-item">
+        <h3>Emailment</h3>
+        <audio controls src="vv-anthems/Emailment Song.mp3">Your browser does not support the audio element.</audio>
+      </li>
+      <li class="song-item">
+        <h3>Funads</h3>
+        <audio controls src="vv-anthems/Funads Song.mp3">Your browser does not support the audio element.</audio>
+      </li>
+      <li class="song-item">
+        <h3>Generack</h3>
+        <audio controls src="vv-anthems/Generack Song.mp3">Your browser does not support the audio element.</audio>
+      </li>
+      <li class="song-item">
+        <h3>Headtags</h3>
+        <audio controls src="vv-anthems/Headtags Song.mp3">Your browser does not support the audio element.</audio>
+      </li>
+      <li class="song-item">
+        <h3>Influbound</h3>
+        <audio controls src="vv-anthems/Influbound Song.mp3">Your browser does not support the audio element.</audio>
+      </li>
+      <li class="song-item">
+        <h3>Jourjit</h3>
+        <audio controls src="vv-anthems/Jourjit Song.mp3">Your browser does not support the audio element.</audio>
+      </li>
+      <li class="song-item">
+        <h3>Keydicators</h3>
+        <audio controls src="vv-anthems/Keydicators Song.mp3">Your browser does not support the audio element.</audio>
+      </li>
+      <!-- Add list items for the rest of your songs (L-Z) following the same pattern -->
+      <!-- Example for 'L':
+      <li class="song-item">
+        <h3>[L-Term Name]</h3>
+        <audio controls src="vv-anthems/[L-Term Song File Name].mp3">Your browser does not support the audio element.</audio>
+      </li>
+      -->
+    </ul>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 Jasper Evangelista. All Rights Reserved.<br>
+    <a href="index.html">Back to Home</a>
+  </div>
+
+</body>
+</html>
