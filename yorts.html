@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yorts | VV Anthem</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+      color: #fff;
+      font-family: 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+    .cover-art {
+      width: 98vw;
+      max-width: 600px;
+      aspect-ratio: 1/1;
+      height: auto;
+      border-radius: 32px;
+      box-shadow: 0 4px 32px #43cea288;
+      margin-bottom: 2rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      object-fit: cover;
+    }
+    .audio-player {
+      width: 98vw;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      transform: scale(1.3);
+      transform-origin: top center;
+    }
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 2px 12px #43cea288;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+    .back-link {
+      color: #43cea2;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      display: inline-block;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      .cover-art {
+        width: 98vw;
+        max-width: 98vw;
+        border-radius: 20px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .audio-player {
+        width: 98vw;
+        max-width: 98vw;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Yorts</h1>
+  <audio class="audio-player" controls src="vv-anthems/Yorts Song.mp3">
+    Your browser does not support the audio element.
+  </audio>
+  <img src="vv-anthems/yorts-cover.jpg" alt="Yorts Cover Art" class="cover-art">
+  
+</body>
+</html>
