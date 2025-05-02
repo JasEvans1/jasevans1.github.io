@@ -17,21 +17,13 @@
     .wheel-btn { position: absolute; width: 54px; height: 54px; background: none; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; transition: background 0.2s; box-shadow: none; }
     .wheel-btn:active { background: #e0e0e0; }
     .btn-rewind { left: 15px; top: 50%; transform: translateY(-50%); }
-    .btn-play { bottom: 15px; left: 50%; transform: translateX(-50%); }
     .btn-forward { right: 15px; top: 50%; transform: translateY(-50%); }
-    .wheel-btn svg { width: 33px; height: 33px; fill: #888; }
+    .wheel-btn svg { width: 33px; height: 33px; fill: #fff; transition: fill 0.2s; }
     .wheel-center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 75px; height: 75px; background: #eee; border-radius: 50%; box-shadow: 0 3px 12px #185a9d22; display: flex; align-items: center; justify-content: center; z-index: 3; border: 3px solid #e0e0e0; pointer-events: none; }
-    .wheel-center svg { width: 33px; height: 33px; fill: #eee; }
-    @media (max-width: 600px) { .ipod-player { width: 98vw; height: 140vw; min-width: 220px; min-height: 350px;} .ipod-screen { width: 96%; } .ipod-wheel { width: 50vw; height: 50vw; min-width: 120px; min-height: 120px;} .wheel-title { width: 120px; font-size: 14px;} }
-    /* Play button pulse */
-    @keyframes pulse {
-      0%   { transform: scale(1); }
-      50%  { transform: scale(1.25); }
-      100% { transform: scale(1); }
-    }
-    .pulsing {
-      animation: pulse 1.1s infinite cubic-bezier(.4,0,.6,1);
-    }
+    .center-play-btn { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1.2); width: 75px; height: 75px; background: none; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 4; transition: background 0.2s; box-shadow: none; }
+    .center-play-btn:active { background: #e0e0e0; }
+    .center-play-btn svg { width: 44px; height: 44px; fill: #e53935; transition: fill 0.2s; }
+    @media (max-width: 600px) { .ipod-player { width: 98vw; height: 140vw; min-width: 220px; min-height: 350px;} .ipod-screen { width: 96%; } .ipod-wheel { width: 50vw; height: 50vw; min-width: 120px; min-height: 120px;} .wheel-title { width: 120px; font-size: 14px;} .center-play-btn { width: 44px; height: 44px;} .center-play-btn svg { width: 28px; height: 28px;} }
   </style>
 </head>
 <body>
@@ -46,23 +38,23 @@
       <button class="wheel-btn btn-rewind" id="rewindBtn" title="Rewind 10s">
         <svg viewBox="0 0 60 60"><polygon points="35,10 10,30 35,50"/><polygon points="50,10 25,30 50,50"/></svg>
       </button>
-      <button class="wheel-btn btn-play pulsing" id="playPauseBtn" title="Play/Pause">
-        <svg id="playIcon" viewBox="0 0 60 60"><polygon points="15,10 50,30 15,50"/></svg>
-        <svg id="pauseIcon" viewBox="0 0 60 60" style="display:none;"><rect x="15" y="10" width="10" height="40"/><rect x="35" y="10" width="10" height="40"/></svg>
-      </button>
       <button class="wheel-btn btn-forward" id="forwardBtn" title="Forward 10s">
         <svg viewBox="0 0 60 60"><polygon points="10,10 35,30 10,50"/><polygon points="25,10 50,30 25,50"/></svg>
       </button>
       <div class="wheel-center">
         <svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" stroke="#eee" stroke-width="4" fill="none"/></svg>
       </div>
+      <button class="center-play-btn" id="centerPlayBtn" title="Play/Pause">
+        <svg id="playIcon" viewBox="0 0 60 60"><polygon points="15,10 50,30 15,50"/></svg>
+        <svg id="pauseIcon" viewBox="0 0 60 60" style="display:none;"><rect x="15" y="10" width="10" height="40"/><rect x="35" y="10" width="10" height="40"/></svg>
+      </button>
     </div>
     <audio id="audio" src="vv-anthems/Funads Song.mp3"></audio>
   </div>
   <script>
     // Audio controls
     const audio = document.getElementById('audio');
-    const playPauseBtn = document.getElementById('playPauseBtn');
+    const playPauseBtn = document.getElementById('centerPlayBtn');
     const playIcon = document.getElementById('playIcon');
     const pauseIcon = document.getElementById('pauseIcon');
     const rewindBtn = document.getElementById('rewindBtn');
@@ -80,12 +72,10 @@
     playPauseBtn.addEventListener('click', () => {
       if (audio.paused) {
         audio.play();
-        playPauseBtn.classList.remove('pulsing');
         playIcon.style.display = 'none';
         pauseIcon.style.display = 'block';
       } else {
         audio.pause();
-        playPauseBtn.classList.add('pulsing');
         playIcon.style.display = 'block';
         pauseIcon.style.display = 'none';
       }
@@ -100,7 +90,6 @@
     });
 
     audio.addEventListener('ended', () => {
-      playPauseBtn.classList.add('pulsing');
       playIcon.style.display = 'block';
       pauseIcon.style.display = 'none';
     });
@@ -147,18 +136,18 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const cx = canvas.width/2;
       const cy = canvas.height/2;
-      const maxRadius = Math.min(canvas.width, canvas.height) * 0.36;
+      const maxRadius = Math.min(canvas.width, canvas.height) * 0.38;
       // Animate pulse
       pulse += 0.012 * pulseDir;
       if (pulse > 1) { pulse = 1; pulseDir = -1; }
       if (pulse < 0) { pulse = 0; pulseDir = 1; }
       // Soft neon green glow
-      let alpha = 0.32 + 0.18 * pulse;
+      let alpha = 0.38 + 0.22 * pulse;
       let radius = maxRadius * (0.82 + 0.18 * pulse);
       let grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
-      grad.addColorStop(0, 'rgba(57,255,20,0.85)'); // neon green
-      grad.addColorStop(0.25, 'rgba(57,255,20,0.32)');
-      grad.addColorStop(0.6, 'rgba(57,255,20,0.12)');
+      grad.addColorStop(0, 'rgba(57,255,20,0.95)'); // neon green
+      grad.addColorStop(0.18, 'rgba(57,255,20,0.38)');
+      grad.addColorStop(0.5, 'rgba(57,255,20,0.16)');
       grad.addColorStop(1, 'rgba(57,255,20,0)');
       ctx.save();
       ctx.globalAlpha = alpha;
