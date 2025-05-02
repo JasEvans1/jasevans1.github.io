@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <title>Abtribute | VV Anthem</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Zapfino is not a web font, but we can use a similar script font as fallback -->
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
     body {
       background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
       color: #fff;
@@ -18,11 +20,11 @@
       padding: 0;
     }
     .cover-art {
-      width: 95vw;
-      max-width: 500px;
+      width: 98vw;
+      max-width: 600px;
       aspect-ratio: 1/1;
       height: auto;
-      border-radius: 24px;
+      border-radius: 32px;
       box-shadow: 0 4px 32px #43cea288;
       margin-bottom: 2rem;
       display: block;
@@ -30,14 +32,50 @@
       margin-right: auto;
       object-fit: cover;
     }
-    .audio-player { width: 90vw; max-width: 400px; margin-bottom: 2rem; }
-    h1 { font-size: 2rem; margin-bottom: 1rem; text-shadow: 0 2px 12px #43cea288; }
-    .back-link { color: #43cea2; text-decoration: none; font-weight: bold; }
-    .back-link:hover { text-decoration: underline; }
+    .audio-player {
+      width: 90vw;
+      max-width: 400px;
+      margin-bottom: 2rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 2px 12px #43cea288;
+      font-family: Zapfino, 'Great Vibes', cursive, sans-serif;
+      letter-spacing: 2px;
+      font-weight: normal;
+    }
+    .back-link {
+      color: #43cea2;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      display: inline-block;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      .cover-art {
+        width: 98vw;
+        max-width: 98vw;
+        border-radius: 20px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .audio-player {
+        width: 98vw;
+        max-width: 98vw;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>A B T R I B U T E</h1>
+  <h1>Abtribute</h1>
   <img src="vv-anthems/abtribute-cover.jpg" alt="Abtribute Cover Art" class="cover-art">
   <audio class="audio-player" controls src="vv-anthems/Abtribute Song.mp3">
     Your browser does not support the audio element.
