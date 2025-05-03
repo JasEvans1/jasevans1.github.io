@@ -15,7 +15,7 @@
     }
     header {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       padding: 2rem 4vw 1rem 4vw;
       background: transparent;
@@ -23,7 +23,7 @@
       z-index: 10;
     }
     .logo img {
-      height: 120px; /* Increased size for prominence */
+      height: 240px; /* 200% bigger */
       width: auto;
       display: block;
       filter: drop-shadow(0 0 8px #00ffd0);
@@ -36,10 +36,7 @@
       filter: drop-shadow(0 0 12px #00ffd0);
     }
     nav {
-      position: absolute;
-      right: 4vw;
-      top: 50%;
-      transform: translateY(-50%);
+      margin-left: auto;
     }
     nav a {
       color: #fff;
@@ -55,14 +52,16 @@
     .hero {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       min-height: 60vh;
       padding: 4vw;
       background: linear-gradient(120deg, #0a0a0a 60%, #00ffd0 100%);
       position: relative;
       overflow: hidden;
-      text-align: center;
+      text-align: left;
+      max-width: 900px;
+      margin-left: 4vw;
     }
     .hero h1 {
       font-size: 3rem;
@@ -72,7 +71,6 @@
       letter-spacing: 1px;
       color: #fff;
       text-shadow: 0 4px 32px #00ffd0aa;
-      max-width: 800px;
     }
     .hero h2 {
       font-size: 1.5rem;
@@ -80,7 +78,6 @@
       margin: 0 0 2rem 0;
       color: #00ffd0;
       letter-spacing: 1px;
-      max-width: 600px;
     }
     .hero .cta {
       background: #00ffd0;
@@ -208,14 +205,24 @@
         font-size: 1.3rem;
       }
       nav {
-        position: static;
-        transform: none;
+        margin-left: 0;
         margin-top: 1rem;
         text-align: center;
+        width: 100%;
+        order: 2;
       }
-      nav a {
-        margin-left: 1rem;
-        margin-right: 1rem;
+      header {
+        flex-wrap: wrap;
+      }
+      .hero {
+        margin-left: 0;
+        padding: 2vw;
+        max-width: 100%;
+        text-align: center;
+        align-items: center;
+      }
+      .hero h1, .hero h2 {
+        text-align: center;
       }
     }
   </style>
@@ -234,8 +241,8 @@
     </nav>
   </header>
   <section class="hero">
-    <h1>Creative Marketing Studio<br />for Bold Brands</h1>
-    <h2>Elevate your brand with strategy, design, and digital innovation.</h2>
+    <h1>BE FEARLESS. YOUR BRAND. YOUR EMPIRE.</h1>
+    <h2>No matter where you are in your life journey, it's time to rediscover your true north, awaken your faith and ignite your passions.</h2>
     <a href="#contact"><button class="cta">Start a Project</button></a>
   </section>
   <section class="section" id="work">
