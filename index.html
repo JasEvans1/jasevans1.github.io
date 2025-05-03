@@ -1,11 +1,9 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Jasper Evangelista | Creative Marketing Studio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap');
     body {
@@ -17,17 +15,31 @@
     }
     header {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       padding: 2rem 4vw 1rem 4vw;
       background: transparent;
+      position: relative;
+      z-index: 10;
     }
-    .logo {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: #fff;
-      text-transform: uppercase;
+    .logo img {
+      height: 120px; /* Increased size for prominence */
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 0 8px #00ffd0);
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .logo img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 12px #00ffd0);
+    }
+    nav {
+      position: absolute;
+      right: 4vw;
+      top: 50%;
+      transform: translateY(-50%);
     }
     nav a {
       color: #fff;
@@ -43,22 +55,24 @@
     .hero {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
       min-height: 60vh;
       padding: 4vw;
       background: linear-gradient(120deg, #0a0a0a 60%, #00ffd0 100%);
       position: relative;
       overflow: hidden;
+      text-align: center;
     }
     .hero h1 {
       font-size: 3rem;
       font-weight: 700;
-      margin: 0 0 1rem 0;
+      margin: 1rem 0 1rem 0;
       line-height: 1.1;
       letter-spacing: 1px;
       color: #fff;
       text-shadow: 0 4px 32px #00ffd0aa;
+      max-width: 800px;
     }
     .hero h2 {
       font-size: 1.5rem;
@@ -66,6 +80,7 @@
       margin: 0 0 2rem 0;
       color: #00ffd0;
       letter-spacing: 1px;
+      max-width: 600px;
     }
     .hero .cta {
       background: #00ffd0;
@@ -192,14 +207,24 @@
       .section-title {
         font-size: 1.3rem;
       }
+      nav {
+        position: static;
+        transform: none;
+        margin-top: 1rem;
+        text-align: center;
+      }
+      nav a {
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">
-  <img src="https://raw.githubusercontent.com/JasEvans1/jasevans1.github.io/main/JASLOGO.png" alt="Jasper Evangelista Logo" style="height: 50px; width: auto;">
-</div>
+      <img src="https://raw.githubusercontent.com/JasEvans1/jasevans1.github.io/main/jaslogowebsite.png" alt="Jasper Evangelista Logo" />
+    </div>
     <nav>
       <a href="vv-anthems.html">VV Anthems</a>
       <a href="#work">Work</a>
@@ -209,7 +234,7 @@
     </nav>
   </header>
   <section class="hero">
-    <h1>Creative Marketing Studio<br>for Bold Brands</h1>
+    <h1>Creative Marketing Studio<br />for Bold Brands</h1>
     <h2>Elevate your brand with strategy, design, and digital innovation.</h2>
     <a href="#contact"><button class="cta">Start a Project</button></a>
   </section>
@@ -217,21 +242,21 @@
     <div class="section-title">Featured Work</div>
     <div class="projects">
       <div class="project-card">
-        <img class="project-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="Project 1">
+        <img class="project-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="Project 1" />
         <div class="project-content">
           <h4>Brand Launch: SportX</h4>
           <p>Full brand identity, campaign, and digital content for a rising sports brand.</p>
         </div>
       </div>
       <div class="project-card">
-        <img class="project-img" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Project 2">
+        <img class="project-img" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Project 2" />
         <div class="project-content">
           <h4>Motion Campaign: PlayBig</h4>
           <p>Dynamic motion graphics and social content for a global sports event.</p>
         </div>
       </div>
       <div class="project-card">
-        <img class="project-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Project 3">
+        <img class="project-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Project 3" />
         <div class="project-content">
           <h4>Product Design: FanKit</h4>
           <p>Innovative merchandise and packaging for fan engagement.</p>
@@ -279,7 +304,7 @@
   <section class="section" id="about">
     <div class="section-title">About</div>
     <p>
-      Based in Manila, Jasper Evangelista is a creative marketing leader with a passion for sports, branding, and digital innovation. 
+      Based in Manila, Jasper Evangelista is a creative marketing leader with a passion for sports, branding, and digital innovation.
       With a track record of elevating brands through bold ideas and flawless execution, Jasper partners with clients to create unforgettable campaigns and experiences.
     </p>
   </section>
@@ -287,19 +312,37 @@
     <div class="section-title">Start a Project</div>
     <p>Ready to make your brand unforgettable? Let’s connect!</p>
     <p>
-      <strong>Email:</strong> <a href="mailto:hello@jasperevangelista.com">hello@jasperevangelista.com</a><br>
+      <strong>Email:</strong> <a href="mailto:hello@jasperevangelista.com">hello@jasperevangelista.com</a><br />
       <strong>Instagram:</strong> <a href="https://instagram.com/jasperevangelista" target="_blank">@jasperevangelista</a>
     </p>
     <form name="contact" method="POST" data-netlify="true">
-      <input type="text" name="name" placeholder="Your Name" required style="padding:0.7em; margin:0.5em; border-radius:8px; border:none; width:220px;">
-      <input type="email" name="email" placeholder="Your Email" required style="padding:0.7em; margin:0.5em; border-radius:8px; border:none; width:220px;">
-      <textarea name="message" placeholder="Tell me about your project..." required style="padding:0.7em; margin:0.5em; border-radius:8px; border:none; width:460px; height:80px;"></textarea><br>
+      <input
+        type="text"
+        name="name"
+        placeholder="Your Name"
+        required
+        style="padding:0.7em; margin:0.5em; border-radius:8px; border:none; width:220px;"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Your Email"
+        required
+        style="padding:0.7em; margin:0.5em; border-radius:8px; border:none; width:220px;"
+      />
+      <textarea
+        name="message"
+        placeholder="Tell me about your project..."
+        required
+        style="padding:0.7em; margin:0.5em; border-radius:8px; border:none; width:460px; height:80px;"
+      ></textarea
+      ><br />
       <button type="submit" class="cta">Submit</button>
     </form>
   </section>
   <div class="footer">
-    &copy; 2025 Jasper Evangelista. All Rights Reserved.<br>
-    <a href="mailto:hello@jasperevangelista.com">hello@jasperevangelista.com</a> | 
+    &copy; 2025 Jasper Evangelista. All Rights Reserved.<br />
+    <a href="mailto:hello@jasperevangelista.com">hello@jasperevangelista.com</a> |
     <a href="https://instagram.com/jasperevangelista" target="_blank">Instagram</a>
   </div>
 </body>
