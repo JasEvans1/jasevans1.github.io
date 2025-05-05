@@ -1,356 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Jasper Evangelista | Creative Marketing Studio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap');
-    body {
-      margin: 0;
-      font-family: 'Montserrat', Arial, sans-serif;
-      background: #0a0a0a;
-      color: #fff;
-      min-height: 100vh;
-    }
-    header {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 2rem 4vw 1rem 4vw;
-      background: transparent;
-      position: relative;
-      z-index: 10;
-    }
-    .logo img {
-      height: 240px; /* 200% bigger */
-      width: auto;
-      display: block;
-      filter: drop-shadow(0 0 8px #00ffd0);
-      border-radius: 12px;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
-    .logo img:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 12px #00ffd0);
-    }
-    nav {
-      margin-left: auto;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 2rem;
-      font-weight: 400;
-      font-size: 1rem;
-      transition: color 0.2s;
-    }
-    nav a:hover {
-      color: #00ffd0;
-    }
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      min-height: 60vh;
-      padding: 4vw;
-      background: linear-gradient(120deg, #0a0a0a 60%, #00ffd0 100%);
-      position: relative;
-      overflow: hidden;
-      text-align: left;
-      max-width: 900px;
-      margin-left: 4vw;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin: 1rem 0 1rem 0;
-      line-height: 1.1;
-      letter-spacing: 1px;
-      color: #fff;
-      text-shadow: 0 4px 32px #00ffd0aa;
-    }
-    .hero h2 {
-      font-size: 1.5rem;
-      font-weight: 400;
-      margin: 0 0 2rem 0;
-      color: #00ffd0;
-      letter-spacing: 1px;
-    }
-    .hero .cta {
-      background: #00ffd0;
-      color: #0a0a0a;
-      padding: 1rem 2.5rem;
-      border: none;
-      border-radius: 30px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 2px 16px #00ffd088;
-      transition: background 0.2s, color 0.2s;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .hero .cta:hover {
-      background: #fff;
-      color: #00ffd0;
-    }
-    .section {
-      padding: 4vw 4vw 2vw 4vw;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .section-title {
-      font-size: 2rem;
-      color: #00ffd0;
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .services {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-    .service-card {
-      background: #181818;
-      border-radius: 18px;
-      padding: 2rem;
-      flex: 1 1 220px;
-      min-width: 220px;
-      box-shadow: 0 2px 16px #00ffd022;
-      transition: transform 0.2s;
-    }
-    .service-card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 8px 32px #00ffd044;
-    }
-    .service-card h3 {
-      color: #00ffd0;
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-    .service-card ul {
-      margin: 0;
-      padding-left: 1.2em;
-      color: #fff;
-      font-size: 1rem;
-    }
-    .projects {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-    .project-card {
-      background: #111;
-      border-radius: 16px;
-      flex: 1 1 320px;
-      min-width: 320px;
-      margin-bottom: 2rem;
-      overflow: hidden;
-      box-shadow: 0 2px 16px #00ffd022;
-      transition: transform 0.2s;
-    }
-    .project-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 8px 32px #00ffd044;
-    }
-    .project-img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      background: #222;
-    }
-    .project-content {
-      padding: 1.2rem;
-    }
-    .project-content h4 {
-      margin: 0 0 0.5rem 0;
-      color: #00ffd0;
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-    .project-content p {
-      margin: 0;
-      color: #fff;
-      font-size: 1rem;
-    }
-    .footer {
-      background: #181818;
-      color: #fff;
-      text-align: center;
-      padding: 2rem 4vw;
-      font-size: 1rem;
-      margin-top: 2rem;
-    }
-    .footer a {
-      color: #00ffd0;
-      text-decoration: none;
-      margin: 0 0.5rem;
-      font-weight: 700;
-    }
-    @media (max-width: 900px) {
-      .services, .projects {
-        flex-direction: column;
-      }
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-      .section-title {
-        font-size: 1.3rem;
-      }
-      nav {
-        margin-left: 0;
-        margin-top: 1rem;
-        text-align: center;
-        width: 100%;
-        order: 2;
-      }
-      header {
-        flex-wrap: wrap;
-      }
-      .hero {
-        margin-left: 0;
-        padding: 2vw;
-        max-width: 100%;
-        text-align: center;
-        align-items: center;
-      }
-      .hero h1, .hero h2 {
-        text-align: center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jasper Evangelista | Creative Marketing Studio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #1e293b;
+            background-color: #fff;
+        }
+
+        /* Header & Navigation */
+        header {
+            padding: 2rem 4vw;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+        }
+
+        .logo-container img {
+            width: 200px;
+            height: auto;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #3b82f6;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(150deg, #f0f9ff 0%, #ffffff 100%);
+            padding-top: 160px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin: 2rem 0 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            max-width: 800px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: #64748b;
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: #3b82f6;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: #1e40af;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+            background: white;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h4 {
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 2rem;
+            border-radius: 12px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .service-card h3 {
+            color: #1e40af;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card ul {
+            color: #64748b;
+            padding-left: 1.2em;
+            line-height: 1.8;
+            list-style-type: none;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 4rem;
+        }
+
+        .footer a {
+            color: #3b82f6;
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem 2vw;
+            }
+
+            .logo-container img {
+                width: 160px;
+                margin-bottom: 1rem;
+            }
+
+            nav {
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="https://raw.githubusercontent.com/JasEvans1/jasevans1.github.io/main/jaslogowebsite.png" alt="Jasper Evangelista Logo" />
-    </div>
-    <nav>
-      <a href="vv-anthems.html">VV Anthems</a>
-      <a href="#work">Work</a>
-      <a href="#services">Services</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-  <section class="hero">
-    <h1>BE FEARLESS. YOUR BRAND. YOUR EMPIRE.</h1>
-    <h2>No matter where you are in your life journey, it's time to rediscover your true north, awaken your faith and ignite your passions.</h2>
-    <a href="#contact"><button class="cta">Start a Project</button></a>
-  </section>
-  <section class="section" id="work">
-    <div class="section-title">Featured Work</div>
-    <div class="projects">
-      <div class="project-card">
-        <img class="project-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="Project 1" />
-        <div class="project-content">
-          <h4>Brand Launch: SportX</h4>
-          <p>Full brand identity, campaign, and digital content for a rising sports brand.</p>
+    <header>
+        <div class="logo-container">
+            <img src="https://raw.githubusercontent.com/JasEvans1/jasevans1.github.io/main/jaslogowebsite.png" alt="Jasper Evangelista Logo">
         </div>
-      </div>
-      <div class="project-card">
-        <img class="project-img" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Project 2" />
-        <div class="project-content">
-          <h4>Motion Campaign: PlayBig</h4>
-          <p>Dynamic motion graphics and social content for a global sports event.</p>
+        <nav>
+            <a href="vv-anthems.html">VV Anthems</a>
+            <a href="#work">Work</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Be Fearless. Your Brand. Your Empire.</h1>
+        <p class="subtitle">
+            No matter where you are in your life journey, it's time to rediscover your true north, awaken your faith and ignite your passions.
+        </p>
+        <a href="#contact" class="cta-button">Start a Project</a>
+    </section>
+
+    <section class="section" id="work">
+        <h2 class="section-title">Featured Work</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img class="project-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="Project 1">
+                <div class="project-content">
+                    <h4>Brand Launch: SportX</h4>
+                    <p>Full brand identity, campaign, and digital content for a rising sports brand.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img class="project-img" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="Project 2">
+                <div class="project-content">
+                    <h4>Motion Campaign: PlayBig</h4>
+                    <p>Dynamic motion graphics and social content for a global sports event.</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img class="project-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Project 3">
+                <div class="project-content">
+                    <h4>Product Design: FanKit</h4>
+                    <p>Innovative merchandise and packaging for fan engagement.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="project-card">
-        <img class="project-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Project 3" />
-        <div class="project-content">
-          <h4>Product Design: FanKit</h4>
-          <p>Innovative merchandise and packaging for fan engagement.</p>
+    </section>
+
+    <section class="section" id="services">
+        <h2 class="section-title">Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Brand</h3>
+                <ul>
+                    <li>Logo & Visual Identity</li>
+                    <li>Brand Guidelines</li>
+                    <li>Brand Strategy</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>Campaign</h3>
+                <ul>
+                    <li>Key Visuals</li>
+                    <li>Campaign Toolkit</li>
+                    <li>Event Activation</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>Content</h3>
+                <ul>
+                    <li>Social Media Assets</li>
+                    <li>Motion Graphics</li>
+                    <li>Photography & Video</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>Product</h3>
+                <ul>
+                    <li>Merchandise</li>
+                    <li>Packaging</li>
+                    <li>Printables</li>
+                </ul>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <section class="section" id="contact">
+        <h2 class="section-title">Start a Project</h2>
+        <div class="contact-form">
+            <form name="contact" method="POST" data-netlify="true">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Tell me about your project..." rows="4" required></textarea>
+                <button type="submit" class="cta-button">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <div class="footer">
+        &copy; 2025 Jasper Evangelista. All Rights Reserved.<br>
+        <a href="mailto:hello@jasperevangelista.com">hello@jasperevangelista.com</a> |
+        <a href="https://instagram.com/jasperevangelista" target="_blank">Instagram</a>
     </div>
-  </section>
-  <section class="section" id="services">
-    <div class="section-title">Services</div>
-    <div class="services">
-      <div class="service-card">
-        <h3>Brand</h3>
-        <ul>
-          <li>Logo & Visual Identity</li>
-          <li>Brand Guidelines</li>
-          <li>Brand Strategy</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <h3>Campaign</h3>
-        <ul>
-          <li>Key Visuals</li>
-          <li>Campaign Toolkit</li>
-          <li>Event Activation</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <h3>Content</h3>
-        <ul>
-          <li>Social Media Assets</li>
-          <li>Motion Graphics</li>
-          <li>Photography & Video</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <h3>Product</h3>
-        <ul>
-          <li>Merchandise</li>
-          <li>Packaging</li>
-          <li>Printables</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  <section class="section" id="about">
-    <div class="section-title">About</div>
-    <p>
-      Jasperevangelista.com is a motivational branding site that helps individuals and businesses reach their full potential by creating powerful and effective brand stories. 
-      We specialize in marketing strategy, brand identity, and creative design, giving our clients the tools to tell their stories, maximize their impact and fulfill their goals in life.
-    </p>
-  </section>
-  <section class="section" id="contact">
-    <div class="section-title">Start a Project</div>
-    <p>Ready to make your brand unforgettable? Let’s connect!</p>
-    <p>
-      <strong>Email:</strong> <a href="mailto:hello@jasperevangelista.com">hello@jasperevangelista.com</a><br />
-      <strong>Instagram:</strong> <a href="https://instagram.com/jasperevangelista" target="_blank">@jasperevangelista</a>
-    </p>
-    <form name="contact" method="POST" data-netlify="true">
-      <input
-        type="text"
-        name="name"
-        placeholder="Your Name"
-        required
-        style="padding:0.7em; margin:0.5em; border-radius:8px; border:none; width:220px;"
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Your Email"
-        required
-        style="padding:0.7em; margin:0.5em; border-radius:8px; border:none; width:220px;"
-      />
-      <textarea
-        name="message"
-        placeholder="Tell me about your project..."
-        required
-        style="padding:0.7em; margin:0.5em; border-radius:8px; border:none; width:460px; height:80px;"
-      ></textarea
-      ><br />
-      <button type="submit" class="cta">Submit</button>
-    </form>
-  </section>
-  <div class="footer">
-    &copy; 2025 Jasper Evangelista. All Rights Reserved.<br />
-    <a href="mailto:hello@jasperevangelista.com">hello@jasperevangelista.com</a> |
-    <a href="https://instagram.com/jasperevangelista" target="_blank">Instagram</a>
-  </div>
 </body>
 </html>
