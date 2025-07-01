@@ -4,330 +4,366 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viral Vocab Anthems | Jasper Evangelista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         body {
-            line-height: 1.6;
-            color: #1e293b;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            position: relative;
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
         }
 
-        body::before {
-            content: '';
+        /* Sidebar Navigation */
+        .sidebar {
             position: fixed;
-            top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="20" cy="80" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Header & Navigation */
-        header {
-            padding: 2rem 4vw;
-            position: sticky;
             top: 0;
-            width: 100%;
-            z-index: 100;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 2rem 1.5rem;
+            z-index: 1000;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-section {
+            margin-bottom: 3rem;
+        }
+
+        .logo {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .logo-container img {
-            width: 200px;
-            height: auto;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-        }
-
-        nav {
-            display: flex;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: #64748b;
+            gap: 0.75rem;
             text-decoration: none;
+            color: #ffffff;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+
+        .nav-title {
+            font-size: 0.875rem;
             font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 0.5rem 1rem;
+            color: #a1a1aa;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
             border-radius: 8px;
-        }
-
-        nav a:hover {
-            color: #3b82f6;
-            background: rgba(59, 130, 246, 0.1);
-            transform: translateY(-2px);
-        }
-
-        nav a.active {
-            color: #3b82f6;
-            background: rgba(59, 130, 246, 0.15);
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 50%;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            text-decoration: none;
+            color: #d1d5db;
+            font-weight: 500;
             transition: all 0.3s ease;
-            transform: translateX(-50%);
         }
 
-        nav a:hover::after {
-            width: 80%;
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.8;
         }
 
         /* Main Content */
-        .section {
-            padding: 4rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
+        .top-bar {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 2rem;
+            z-index: 100;
         }
 
-        .section-title {
-            font-size: 3.5rem;
+        .page-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .page-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 24px rgba(30, 64, 175, 0.4);
+        }
+
+        .page-info h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
             background: linear-gradient(135deg, #ffffff, #e2e8f0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1rem;
-            font-weight: 800;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        /* Anthem Grid */
-        .anthem-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .anthem-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .anthem-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .anthem-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-        }
-
-        .anthem-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .anthem-content {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .anthem-cover {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 16px;
-            flex-shrink: 0;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
-
-        .anthem-card:hover .anthem-cover {
-            transform: scale(1.05);
-        }
-
-        .anthem-info h3 {
-            color: #1e40af;
-            margin-bottom: 0.5rem;
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        .anthem-info p {
-            color: #64748b;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Enhanced Audio Player */
-        .audio-container {
-            position: relative;
-        }
-
-        audio {
-            width: 100%;
-            height: 60px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-            border: 2px solid rgba(59, 130, 246, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        audio:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
-
-        audio::-webkit-media-controls-panel {
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            border-radius: 10px;
-        }
-
-        audio::-webkit-media-controls-play-button {
-            background: #3b82f6;
-            border-radius: 50%;
+        .page-info p {
+            color: #a1a1aa;
+            font-size: 1.125rem;
+            font-weight: 400;
         }
 
         /* Stats Section */
         .stats-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 4rem 0;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            margin-bottom: 2rem;
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
+            gap: 1.5rem;
+            max-width: 800px;
         }
 
-        .stat-item {
-            color: white;
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
         }
 
         .stat-number {
             font-size: 2.5rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #ffffff, #e2e8f0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
         }
 
         .stat-label {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-top: 0.5rem;
+            color: #d1d5db;
+            font-size: 0.875rem;
+            font-weight: 500;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            color: rgba(255, 255, 255, 0.8);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 4rem;
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(20px);
+        /* Songs Section */
+        .songs-section {
+            padding: 0 2rem 2rem;
         }
 
-        .footer a {
-            color: #60a5fa;
-            text-decoration: none;
-            margin: 0 0.5rem;
-            transition: color 0.3s ease;
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
         }
 
-        .footer a:hover {
-            color: #93c5fd;
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
         }
 
-        /* Responsive Design */
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .toggle-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: #d1d5db;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background: #4f46e5;
+            border-color: #4f46e5;
+            color: #ffffff;
+        }
+
+        /* Songs Grid */
+        .songs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .song-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .song-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .song-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+            border-color: rgba(79, 70, 229, 0.5);
+        }
+
+        .song-card:hover::before {
+            opacity: 1;
+        }
+
+        .song-cover {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .song-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .song-description {
+            font-size: 0.875rem;
+            color: #a1a1aa;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .song-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .play-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.6);
+        }
+
+        .audio-player {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 1rem 2vw;
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
             }
 
-            .logo-container img {
-                width: 160px;
-                margin-bottom: 1rem;
+            .sidebar.open {
+                transform: translateX(0);
             }
 
-            nav {
-                gap: 1rem;
-                flex-wrap: wrap;
+            .main-content {
+                margin-left: 0;
             }
 
-            .section-title {
-                font-size: 2.5rem;
+            .page-info h1 {
+                font-size: 2rem;
             }
 
-            .anthem-grid {
+            .songs-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .anthem-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .anthem-cover {
-                width: 100%;
-                height: 200px;
-                max-width: 200px;
+                gap: 1rem;
             }
 
             .stats-grid {
@@ -335,496 +371,457 @@
             }
         }
 
-        /* Loading Animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        /* Custom Audio Styling */
+        audio {
+            width: 100%;
+            height: 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 1rem;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-pause-button {
+            background: #4f46e5;
+            border-radius: 50%;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            background: rgba(79, 70, 229, 0.9);
+            border: none;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .anthem-card {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        .anthem-card:nth-child(even) {
-            animation-delay: 0.1s;
-        }
-
-        .anthem-card:nth-child(3n) {
-            animation-delay: 0.2s;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="https://raw.githubusercontent.com/JasEvans1/jasevans1.github.io/main/jaslogowebsite.png" alt="Jasper Evangelista Logo">
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo-section">
+            <a href="/" class="logo">
+                <div class="logo-icon">JE</div>
+                <div class="logo-text">Jasper Evangelista</div>
+            </a>
         </div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="vv-anthems.html" class="active">Audiology</a>
-            <a href="#work">Samples</a>
-            <a href="#services">Segments</a>
-            <a href="#contact">Let's Chat</a>
+
+        <nav class="nav-section">
+            <h3 class="nav-title">Navigation</h3>
+            <ul class="nav-links">
+                <li><a href="/"><span class="nav-icon">🏠</span>Home</a></li>
+                <li><a href="/shop"><span class="nav-icon">🛒</span>Shop</a></li>
+                <li><a href="/blog"><span class="nav-icon">📝</span>Blog</a></li>
+                <li><a href="/about"><span class="nav-icon">👤</span>About</a></li>
+                <li><a href="/contact"><span class="nav-icon">📧</span>Contact</a></li>
+            </ul>
         </nav>
-    </header>
 
-    <section class="section">
-        <div class="section-header">
-            <h1 class="section-title">Viral Vocab Anthems</h1>
-            <p class="section-subtitle">Experience the power of marketing through music. Each anthem represents a unique concept in the digital marketing universe, crafted to inspire and educate.</p>
-        </div>
+        <nav class="nav-section">
+            <h3 class="nav-title">Audio</h3>
+            <ul class="nav-links">
+                <li><a href="/vv-anthems.html" class="active"><span class="nav-icon">🎵</span>Viral Vocab Anthems</a></li>
+                <li><a href="/episode1.html"><span class="nav-icon">🎙️</span>Podcast</a></li>
+            </ul>
+        </nav>
+    </aside>
 
-        <div class="stats-section">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">25</div>
-                    <div class="stat-label">Original Anthems</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100K+</div>
-                    <div class="stat-label">Total Plays</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Marketing Concepts</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">5★</div>
-                    <div class="stat-label">Average Rating</div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="page-header">
+                <div class="page-icon">🎵</div>
+                <div class="page-info">
+                    <h1>Viral Vocab Anthems</h1>
+                    <p>Experience the power of marketing through music</p>
                 </div>
             </div>
         </div>
 
-        <div class="anthem-grid">
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/abtribute-cover.jpg" alt="Abtribute Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Abtribute</h3>
-                        <p>Exploring the power of attribution in digital marketing campaigns.</p>
-                    </div>
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">25</div>
+                    <div class="stat-label">Original Anthems</div>
                 </div>
-                <div class="audio-container">
+                <div class="stat-card">
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">Total Plays</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Marketing Concepts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5★</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Songs Section -->
+        <section class="songs-section">
+            <div class="section-header">
+                <h2 class="section-title">All Anthems</h2>
+                <div class="view-toggle">
+                    <button class="toggle-btn active">Grid</button>
+                    <button class="toggle-btn">List</button>
+                </div>
+            </div>
+
+            <div class="songs-grid">
+                <!-- Song 1: Abtribute -->
+                <div class="song-card">
+                    <img src="vv-anthems/abtribute-cover.jpg" alt="Abtribute Cover" class="song-cover">
+                    <h3 class="song-title">Abtribute</h3>
+                    <p class="song-description">Exploring the power of attribution in digital marketing campaigns.</p>
                     <audio controls>
                         <source src="vv-anthems/Abtribute Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/brandsonify-cover.jpg" alt="Brandsonify Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Brandsonify</h3>
-                        <p>The art of transforming brands through strategic personification.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 2: Brandsonify -->
+                <div class="song-card">
+                    <img src="vv-anthems/brandsonify-cover.jpg" alt="Brandsonify Cover" class="song-cover">
+                    <h3 class="song-title">Brandsonify</h3>
+                    <p class="song-description">The art of transforming brands through strategic personification.</p>
                     <audio controls>
                         <source src="vv-anthems/Brandsonify Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/convertent-cover.jpg" alt="Convertent Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Convertent</h3>
-                        <p>Mastering the science of conversion optimization and user engagement.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 3: Convertent -->
+                <div class="song-card">
+                    <img src="vv-anthems/convertent-cover.jpg" alt="Convertent Cover" class="song-cover">
+                    <h3 class="song-title">Convertent</h3>
+                    <p class="song-description">Mastering the science of conversion optimization and user engagement.</p>
                     <audio controls>
                         <source src="vv-anthems/Convertent Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/datograph-cover.jpg" alt="Datograph Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Datograph</h3>
-                        <p>Visualizing data stories that drive meaningful business decisions.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 4: Datograph -->
+                <div class="song-card">
+                    <img src="vv-anthems/datograph-cover.jpg" alt="Datograph Cover" class="song-cover">
+                    <h3 class="song-title">Datograph</h3>
+                    <p class="song-description">Visualizing data stories that drive meaningful business decisions.</p>
                     <audio controls>
                         <source src="vv-anthems/Datograph Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/emailment-cover.jpg" alt="Emailment Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Emailment</h3>
-                        <p>Crafting email campaigns that resonate and convert audiences.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 5: Emailment -->
+                <div class="song-card">
+                    <img src="vv-anthems/emailment-cover.jpg" alt="Emailment Cover" class="song-cover">
+                    <h3 class="song-title">Emailment</h3>
+                    <p class="song-description">Crafting email campaigns that resonate and convert audiences.</p>
                     <audio controls>
                         <source src="vv-anthems/Emailment Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/funads-cover.jpg" alt="Funads Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Funads</h3>
-                        <p>Creating advertising experiences that entertain while they sell.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 6: Funads -->
+                <div class="song-card">
+                    <img src="vv-anthems/funads-cover.jpg" alt="Funads Cover" class="song-cover">
+                    <h3 class="song-title">Funads</h3>
+                    <p class="song-description">Creating advertising experiences that entertain while they sell.</p>
                     <audio controls>
                         <source src="vv-anthems/Funads Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/generack-cover.jpg" alt="Generack Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Generack</h3>
-                        <p>Generating leads through strategic content and engagement tactics.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 7: Generack -->
+                <div class="song-card">
+                    <img src="vv-anthems/generack-cover.jpg" alt="Generack Cover" class="song-cover">
+                    <h3 class="song-title">Generack</h3>
+                    <p class="song-description">Generating leads through strategic content and engagement tactics.</p>
                     <audio controls>
                         <source src="vv-anthems/Generack Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/headtags-cover.jpg" alt="Headtags Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Headtags</h3>
-                        <p>Optimizing meta elements for maximum search engine visibility.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 8: Headtags -->
+                <div class="song-card">
+                    <img src="vv-anthems/headtags-cover.jpg" alt="Headtags Cover" class="song-cover">
+                    <h3 class="song-title">Headtags</h3>
+                    <p class="song-description">Optimizing meta elements for maximum search engine visibility.</p>
                     <audio controls>
                         <source src="vv-anthems/Headtags Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/influbound-cover.jpg" alt="Influbound Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Influbound</h3>
-                        <p>Leveraging influencer partnerships for authentic brand growth.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 9: Influbound -->
+                <div class="song-card">
+                    <img src="vv-anthems/influbound-cover.jpg" alt="Influbound Cover" class="song-cover">
+                    <h3 class="song-title">Influbound</h3>
+                    <p class="song-description">Leveraging influencer partnerships for authentic brand growth.</p>
                     <audio controls>
                         <source src="vv-anthems/Influbound Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/jourjit-cover.jpg" alt="Jourjit Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Jourjit</h3>
-                        <p>Journalistic approaches to content marketing and storytelling.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 10: Jourjit -->
+                <div class="song-card">
+                    <img src="vv-anthems/jourjit-cover.jpg" alt="Jourjit Cover" class="song-cover">
+                    <h3 class="song-title">Jourjit</h3>
+                    <p class="song-description">Journalistic approaches to content marketing and storytelling.</p>
                     <audio controls>
                         <source src="vv-anthems/Jourjit Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/keydicators-cover.jpg" alt="Keydicators Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Keydicators</h3>
-                        <p>Identifying and tracking the metrics that matter most.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 11: Keydicators -->
+                <div class="song-card">
+                    <img src="vv-anthems/keydicators-cover.jpg" alt="Keydicators Cover" class="song-cover">
+                    <h3 class="song-title">Keydicators</h3>
+                    <p class="song-description">Identifying and tracking the metrics that matter most.</p>
                     <audio controls>
                         <source src="vv-anthems/Keydicators Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/landgen-cover.jpg" alt="Landgen Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Landgen</h3>
-                        <p>Creating landing pages that convert visitors into customers.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 12: Landgen -->
+                <div class="song-card">
+                    <img src="vv-anthems/landgen-cover.jpg" alt="Landgen Cover" class="song-cover">
+                    <h3 class="song-title">Landgen</h3>
+                    <p class="song-description">Creating landing pages that convert visitors into customers.</p>
                     <audio controls>
                         <source src="vv-anthems/Landgen Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/mobimate-cover.jpg" alt="Mobimate Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Mobimate</h3>
-                        <p>Optimizing experiences for the mobile-first generation.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 13: Mobimate -->
+                <div class="song-card">
+                    <img src="vv-anthems/mobimate-cover.jpg" alt="Mobimate Cover" class="song-cover">
+                    <h3 class="song-title">Mobimate</h3>
+                    <p class="song-description">Optimizing experiences for the mobile-first generation.</p>
                     <audio controls>
                         <source src="vv-anthems/Mobimate Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/nictive-cover.jpg" alt="Nictive Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Nictive</h3>
-                        <p>Connecting brands with audiences through strategic networking.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 14: Nictive -->
+                <div class="song-card">
+                    <img src="vv-anthems/nictive-cover.jpg" alt="Nictive Cover" class="song-cover">
+                    <h3 class="song-title">Nictive</h3>
+                    <p class="song-description">Connecting brands with audiences through strategic networking.</p>
                     <audio controls>
                         <source src="vv-anthems/Nictive Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/omnoreach-cover.jpg" alt="OmnoReach Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>OmnoReach</h3>
-                        <p>Achieving omnipresent brand reach across all channels.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 15: OmnoReach -->
+                <div class="song-card">
+                    <img src="vv-anthems/omnoreach-cover.jpg" alt="OmnoReach Cover" class="song-cover">
+                    <h3 class="song-title">OmnoReach</h3>
+                    <p class="song-description">Achieving omnipresent brand reach across all channels.</p>
                     <audio controls>
                         <source src="vv-anthems/Omnoreach Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/persoclick-cover.jpg" alt="Persoclick Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Persoclick</h3>
-                        <p>Personalizing user experiences for maximum engagement.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 16: Persoclick -->
+                <div class="song-card">
+                    <img src="vv-anthems/persoclick-cover.jpg" alt="Persoclick Cover" class="song-cover">
+                    <h3 class="song-title">Persoclick</h3>
+                    <p class="song-description">Personalizing user experiences for maximum engagement.</p>
                     <audio controls>
                         <source src="vv-anthems/Persoclick Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/quantlity-cover.jpg" alt="Quantlity Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Quantlity</h3>
-                        <p>Balancing quantity and quality in content marketing strategies.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 17: Quantlity -->
+                <div class="song-card">
+                    <img src="vv-anthems/quantlity-cover.jpg" alt="Quantlity Cover" class="song-cover">
+                    <h3 class="song-title">Quantlity</h3>
+                    <p class="song-description">Balancing quantity and quality in content marketing strategies.</p>
                     <audio controls>
                         <source src="vv-anthems/Quantlity Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/retroas-cover.jpg" alt="Retroas Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Retroas</h3>
-                        <p>Retargeting audiences with precision and creative flair.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 18: Retroas -->
+                <div class="song-card">
+                    <img src="vv-anthems/retroas-cover.jpg" alt="Retroas Cover" class="song-cover">
+                    <h3 class="song-title">Retroas</h3>
+                    <p class="song-description">Retargeting audiences with precision and creative flair.</p>
                     <audio controls>
                         <source src="vv-anthems/Retroas Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/seocial-cover.jpg" alt="Seocial Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Seocial</h3>
-                        <p>Merging SEO strategies with social media for amplified reach.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 19: Seocial -->
+                <div class="song-card">
+                    <img src="vv-anthems/seocial-cover.jpg" alt="Seocial Cover" class="song-cover">
+                    <h3 class="song-title">Seocial</h3>
+                    <p class="song-description">Merging SEO strategies with social media for amplified reach.</p>
                     <audio controls>
                         <source src="vv-anthems/Seocial Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/trimonial-cover.jpg" alt="Trimonial Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Trimonial</h3>
-                        <p>Leveraging testimonials to build trust and credibility.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 20: Trimonial -->
+                <div class="song-card">
+                    <img src="vv-anthems/trimonial-cover.jpg" alt="Trimonial Cover" class="song-cover">
+                    <h3 class="song-title">Trimonial</h3>
+                    <p class="song-description">Leveraging testimonials to build trust and credibility.</p>
                     <audio controls>
                         <source src="vv-anthems/Trimonial Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/usergen-cover.jpg" alt="Usergen Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Usergen</h3>
-                        <p>Empowering users to create content that drives engagement.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 21: Usergen -->
+                <div class="song-card">
+                    <img src="vv-anthems/usergen-cover.jpg" alt="Usergen Cover" class="song-cover">
+                    <h3 class="song-title">Usergen</h3>
+                    <p class="song-description">Empowering users to create content that drives engagement.</p>
                     <audio controls>
                         <source src="vv-anthems/Usergen Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/vidcon-cover.jpg" alt="Vidcon Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Vidcon</h3>
-                        <p>Creating video content that captivates and converts audiences.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 22: Vidcon -->
+                <div class="song-card">
+                    <img src="vv-anthems/vidcon-cover.jpg" alt="Vidcon Cover" class="song-cover">
+                    <h3 class="song-title">Vidcon</h3>
+                    <p class="song-description">Creating video content that captivates and converts audiences.</p>
                     <audio controls>
                         <source src="vv-anthems/Vidcon Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/webop-cover.jpg" alt="Webop Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Webop</h3>
-                        <p>Optimizing web operations for peak performance and user experience.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 23: Webop -->
+                <div class="song-card">
+                    <img src="vv-anthems/webop-cover.jpg" alt="Webop Cover" class="song-cover">
+                    <h3 class="song-title">Webop</h3>
+                    <p class="song-description">Optimizing web operations for peak performance and user experience.</p>
                     <audio controls>
                         <source src="vv-anthems/Webop Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/xpertion-cover.jpg" alt="Xpertion Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Xpertion</h3>
-                        <p>Delivering exceptional experiences that exceed expectations.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 24: Xpertion -->
+                <div class="song-card">
+                    <img src="vv-anthems/xpertion-cover.jpg" alt="Xpertion Cover" class="song-cover">
+                    <h3 class="song-title">Xpertion</h3>
+                    <p class="song-description">Delivering exceptional experiences that exceed expectations.</p>
                     <audio controls>
                         <source src="vv-anthems/Xpertion Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/yorts-cover.jpg" alt="Yorts Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Yorts</h3>
-                        <p>Strategic storytelling that resonates with target audiences.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 25: Yorts -->
+                <div class="song-card">
+                    <img src="vv-anthems/yorts-cover.jpg" alt="Yorts Cover" class="song-cover">
+                    <h3 class="song-title">Yorts</h3>
+                    <p class="song-description">Strategic storytelling that resonates with target audiences.</p>
                     <audio controls>
                         <source src="vv-anthems/Yorts Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
-            </div>
 
-            <div class="anthem-card">
-                <div class="anthem-content">
-                    <img src="vv-anthems/zerch-cover.jpg" alt="Zerch Cover" class="anthem-cover">
-                    <div class="anthem-info">
-                        <h3>Zerch</h3>
-                        <p>Zero-friction user experiences that drive seamless conversions.</p>
-                    </div>
-                </div>
-                <div class="audio-container">
+                <!-- Song 26: Zerch -->
+                <div class="song-card">
+                    <img src="vv-anthems/zerch-cover.jpg" alt="Zerch Cover" class="song-cover">
+                    <h3 class="song-title">Zerch</h3>
+                    <p class="song-description">Zero-friction user experiences that drive seamless conversions.</p>
                     <audio controls>
                         <source src="vv-anthems/Zerch Song.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <div class="footer">
-        &copy; 2025 Jasper Evangelista. All Rights Reserved.<br>
-        <a href="mailto:hello@jasperevangelista.com">hello@jasperevangelista.com</a> |
-        <a href="https://instagram.com/jasperevangelista" target="_blank">Instagram</a>
-    </div>
+    <script>
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sidebar');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(e.target) && 
+                !menuBtn.contains(e.target) && 
+                sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            }
+        });
+
+        // Pause other audio players when one starts playing
+        document.addEventListener('play', function(e) {
+            const audios = document.querySelectorAll('audio');
+            audios.forEach(audio => {
+                if (audio !== e.target) {
+                    audio.pause();
+                }
+            });
+        }, true);
+
+        // View toggle functionality
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Here you could implement different view modes
+                // For now, we'll keep the grid view
+            });
+        });
+    </script>
 </body>
 </html>
 
