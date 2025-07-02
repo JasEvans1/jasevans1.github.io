@@ -12,85 +12,80 @@
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Targeted Logo Replacement Script -->
+    <!-- Remove Black Circle and Enlarge Center Logo Script -->
     <script>
       function replaceLogo() {
         // Find all logo containers
         const logoContainers = document.querySelectorAll('.bg-black.rounded-full');
         
         logoContainers.forEach(function(logoContainer) {
-          // Skip if already has an image
-          if (logoContainer.querySelector('img')) {
-            return;
-          }
-          
           const containerRect = logoContainer.getBoundingClientRect();
           const containerSize = Math.min(containerRect.width, containerRect.height);
           
           // Only process visible containers
           if (containerSize < 20) return;
           
-          let logoSize;
-          
-          // Check if this is likely the loading screen (larger container or centered)
-          const isLoadingScreen = containerSize > 50 || 
-                                 (containerRect.left > window.innerWidth * 0.3 && 
-                                  containerRect.left < window.innerWidth * 0.7);
+          // Check if this is the center loading screen (larger and centered)
+          const isLoadingScreen = containerSize > 50 && 
+                                 containerRect.left > window.innerWidth * 0.3 && 
+                                 containerRect.left < window.innerWidth * 0.7 &&
+                                 containerRect.top > window.innerHeight * 0.2 &&
+                                 containerRect.top < window.innerHeight * 0.8;
           
           if (isLoadingScreen) {
-            // Loading screen - use the good 90% ratio you confirmed
-            logoSize = Math.floor(containerSize * 0.9);
+            // This is the center loading screen - remove black circle and show large logo
             
-            // Scale ONLY this specific container (not the whole page)
-            logoContainer.style.transform = 'scale(2.5)';
-            logoContainer.style.transformOrigin = 'center';
-            logoContainer.style.zIndex = '1000';
+            // Create large logo without black circle
+            const img = document.createElement('img');
+            img.src = '/jaslogowebsite.png';
+            img.alt = 'Jasper Evangelista';
+            img.style.cssText = `
+              height: 120px !important;
+              width: 120px !important;
+              border-radius: 50% !important;
+              object-fit: cover !important;
+              display: block !important;
+              margin: 0 !important;
+              padding: 0 !important;
+            `;
             
-            console.log('Loading screen logo container scaled 2.5x');
+            // Remove black background and make container transparent
+            logoContainer.style.cssText = `
+              background: transparent !important;
+              border: none !important;
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              position: relative !important;
+            `;
+            
+            logoContainer.innerHTML = '';
+            logoContainer.appendChild(img);
+            
+            console.log('Center loading screen: Black circle removed, large logo (120px) added');
           } else {
-            // Navigation - keep current good proportion
-            logoSize = Math.floor(containerSize * 0.75);
+            // This is navigation - DON'T TOUCH IT, leave it exactly as is
+            console.log('Navigation logo detected - leaving unchanged');
+            return;
           }
-          
-          const img = document.createElement('img');
-          img.src = '/jaslogowebsite.png';
-          img.alt = 'Jasper Evangelista';
-          img.style.cssText = `
-            height: ${logoSize}px !important;
-            width: ${logoSize}px !important;
-            border-radius: 50% !important;
-            object-fit: cover !important;
-            display: block !important;
-            margin: 0 !important;
-            padding: 0 !important;
-          `;
-          
-          logoContainer.style.cssText += `
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            position: relative !important;
-          `;
-          
-          logoContainer.innerHTML = '';
-          logoContainer.appendChild(img);
-          
-          console.log(`Logo replaced in ${containerSize}px container with ${logoSize}px logo${isLoadingScreen ? ' (LOADING SCREEN)' : ' (navigation)'}`);
         });
       }
 
       // Simple replacement attempts
       function attemptLogoReplacement() {
         let attempts = 0;
-        const maxAttempts = 10;
+        const maxAttempts = 8;
         
         function tryReplace() {
           attempts++;
+          console.log(`Logo replacement attempt ${attempts}`);
           
           replaceLogo();
           
           if (attempts < maxAttempts) {
-            setTimeout(tryReplace, 500);
+            setTimeout(tryReplace, 600);
+          } else {
+            console.log('Logo replacement completed');
           }
         }
         
@@ -99,11 +94,11 @@
 
       // Start when page loads
       window.addEventListener('load', function() {
-        setTimeout(attemptLogoReplacement, 200);
+        setTimeout(attemptLogoReplacement, 300);
       });
 
       document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(attemptLogoReplacement, 200);
+        setTimeout(attemptLogoReplacement, 300);
       });
     </script>
   </body>
