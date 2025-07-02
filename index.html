@@ -12,11 +12,13 @@
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Proportional Logo Replacement Script -->
+    <!-- Large Center Logo Replacement Script -->
     <script>
       function replaceLogo() {
-        // Find all logo containers - both loading screen and navigation
-        const logoContainers = document.querySelectorAll('.bg-black.rounded-full');
+        let replacedCount = 0;
+        
+        // Method 1: Find all black circular containers
+        const logoContainers = document.querySelectorAll('.bg-black.rounded-full, .rounded-full, [class*="rounded-full"]');
         
         logoContainers.forEach(function(logoContainer) {
           // Skip if already has an image
@@ -30,8 +32,16 @@
           // Only process visible containers
           if (containerSize < 20) return;
           
-          // Use consistent 75% ratio for both loading screen and navigation
-          const logoSize = Math.floor(containerSize * 0.75);
+          let logoSize;
+          
+          // Determine context and apply appropriate sizing
+          if (containerSize > 50) {
+            // Large container (loading screen) - make it MUCH bigger (400% as requested)
+            logoSize = Math.floor(containerSize * 1.2); // 120% of container (extends beyond)
+          } else {
+            // Small container (navigation) - keep current proportion
+            logoSize = Math.floor(containerSize * 0.75); // 75% of container
+          }
           
           const img = document.createElement('img');
           img.src = '/jaslogowebsite.png';
@@ -44,6 +54,7 @@
             display: block !important;
             margin: 0 !important;
             padding: 0 !important;
+            z-index: 10 !important;
           `;
           
           logoContainer.style.cssText += `
@@ -51,19 +62,106 @@
             align-items: center !important;
             justify-content: center !important;
             position: relative !important;
+            overflow: visible !important;
           `;
           
           logoContainer.innerHTML = '';
           logoContainer.appendChild(img);
           
-          console.log(`Logo replaced in ${containerSize}px container with ${logoSize}px logo (75% ratio)`);
+          console.log(`Logo replaced in ${containerSize}px container with ${logoSize}px logo`);
+          replacedCount++;
         });
+        
+        // Method 2: Find any circular elements that might be logos
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(el => {
+          const style = window.getComputedStyle(el);
+          const rect = el.getBoundingClientRect();
+          
+          // Look for circular elements with potential logo content
+          if (style.borderRadius && style.borderRadius.includes('50%') && 
+              rect.width > 40 && rect.height > 40 &&
+              !el.querySelector('img')) {
+            
+            const containerSize = Math.min(rect.width, rect.height);
+            
+            // Make loading screen logos VERY large (400%+)
+            const logoSize = Math.floor(containerSize * 1.5); // 150% of container
+            
+            const img = document.createElement('img');
+            img.src = '/jaslogowebsite.png';
+            img.alt = 'Jasper Evangelista';
+            img.style.cssText = `
+              height: ${logoSize}px !important;
+              width: ${logoSize}px !important;
+              border-radius: 50% !important;
+              object-fit: cover !important;
+              display: block !important;
+              margin: 0 !important;
+              padding: 0 !important;
+              z-index: 10 !important;
+            `;
+            
+            el.style.cssText += `
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              position: relative !important;
+              overflow: visible !important;
+            `;
+            
+            el.innerHTML = '';
+            el.appendChild(img);
+            
+            console.log(`Large logo replaced via circular element method (${logoSize}px)`);
+            replacedCount++;
+          }
+        });
+        
+        // Method 3: Find elements with "JE" text and make them HUGE
+        const jeElements = Array.from(document.querySelectorAll('*')).filter(el => 
+          el.textContent && el.textContent.trim() === 'JE' && el.children.length === 0
+        );
+
+        jeElements.forEach(function(logoElement) {
+          const rect = logoElement.getBoundingClientRect();
+          const containerSize = Math.min(rect.width, rect.height);
+          
+          // Make JE replacement VERY large
+          const logoSize = Math.max(80, Math.floor(containerSize * 2)); // At least 80px or 200% of container
+          
+          const img = document.createElement('img');
+          img.src = '/jaslogowebsite.png';
+          img.alt = 'Jasper Evangelista';
+          img.style.cssText = `
+            height: ${logoSize}px !important;
+            width: ${logoSize}px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            z-index: 10 !important;
+          `;
+          
+          logoElement.innerHTML = '';
+          logoElement.appendChild(img);
+          replacedCount++;
+          console.log(`Large JE logo replaced (${logoSize}px)`);
+        });
+        
+        if (replacedCount > 0) {
+          console.log(`Logo replacement successful! Replaced ${replacedCount} logo(s)`);
+          return true;
+        }
+        
+        return false;
       }
 
-      // Logo replacement attempts
+      // Aggressive logo replacement
       function attemptLogoReplacement() {
         let attempts = 0;
-        const maxAttempts = 15;
+        const maxAttempts = 25;
         
         function tryReplace() {
           attempts++;
@@ -72,7 +170,9 @@
           replaceLogo();
           
           if (attempts < maxAttempts) {
-            setTimeout(tryReplace, 300);
+            // Very frequent attempts early on
+            const delay = attempts < 15 ? 100 : 300;
+            setTimeout(tryReplace, delay);
           } else {
             console.log('Logo replacement completed');
           }
@@ -81,17 +181,15 @@
         tryReplace();
       }
 
-      // Start replacement early and continue monitoring
-      window.addEventListener('load', function() {
-        setTimeout(attemptLogoReplacement, 100);
-      });
-
-      document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(attemptLogoReplacement, 100);
-      });
+      // Start immediately and aggressively
+      attemptLogoReplacement();
       
-      // Start immediately
-      setTimeout(attemptLogoReplacement, 50);
+      window.addEventListener('load', attemptLogoReplacement);
+      document.addEventListener('DOMContentLoaded', attemptLogoReplacement);
+      
+      if (document.readyState === 'complete') {
+        attemptLogoReplacement();
+      }
     </script>
   </body>
 </html>
