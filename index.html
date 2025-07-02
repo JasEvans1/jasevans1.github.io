@@ -12,10 +12,10 @@
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Simple Logo Replacement Script -->
+    <!-- Proportional Logo Replacement Script -->
     <script>
       function replaceLogo() {
-        // Only replace navigation logo - don't touch loading screen
+        // Find all logo containers - both loading screen and navigation
         const logoContainers = document.querySelectorAll('.bg-black.rounded-full');
         
         logoContainers.forEach(function(logoContainer) {
@@ -27,9 +27,10 @@
           const containerRect = logoContainer.getBoundingClientRect();
           const containerSize = Math.min(containerRect.width, containerRect.height);
           
-          // Only process small navigation containers (not loading screen)
-          if (containerSize < 30 || containerSize > 60) return;
+          // Only process visible containers
+          if (containerSize < 20) return;
           
+          // Use consistent 75% ratio for both loading screen and navigation
           const logoSize = Math.floor(containerSize * 0.75);
           
           const img = document.createElement('img');
@@ -55,36 +56,42 @@
           logoContainer.innerHTML = '';
           logoContainer.appendChild(img);
           
-          console.log(`Navigation logo replaced (${logoSize}px)`);
+          console.log(`Logo replaced in ${containerSize}px container with ${logoSize}px logo (75% ratio)`);
         });
       }
 
-      // Simple replacement attempts
+      // Logo replacement attempts
       function attemptLogoReplacement() {
         let attempts = 0;
-        const maxAttempts = 10;
+        const maxAttempts = 15;
         
         function tryReplace() {
           attempts++;
+          console.log(`Logo replacement attempt ${attempts}`);
           
           replaceLogo();
           
           if (attempts < maxAttempts) {
-            setTimeout(tryReplace, 500);
+            setTimeout(tryReplace, 300);
+          } else {
+            console.log('Logo replacement completed');
           }
         }
         
         tryReplace();
       }
 
-      // Start when page loads
+      // Start replacement early and continue monitoring
       window.addEventListener('load', function() {
-        setTimeout(attemptLogoReplacement, 200);
+        setTimeout(attemptLogoReplacement, 100);
       });
 
       document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(attemptLogoReplacement, 200);
+        setTimeout(attemptLogoReplacement, 100);
       });
+      
+      // Start immediately
+      setTimeout(attemptLogoReplacement, 50);
     </script>
   </body>
 </html>
