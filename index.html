@@ -12,30 +12,41 @@
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Simple Logo Replacement - Non-intrusive -->
+    <!-- Working Logo Replacement Script -->
     <script>
-      // Wait for the React app to fully load, then replace logo
+      function replaceLogo() {
+        // Find elements with "JE" text (the logo)
+        const jeElements = Array.from(document.querySelectorAll('*')).filter(el => 
+          el.textContent && el.textContent.trim() === 'JE' && el.children.length === 0
+        );
+
+        if (jeElements.length > 0) {
+          const logoElement = jeElements[0];
+          // Replace with actual logo image
+          logoElement.innerHTML = '<img src="/jaslogowebsite.png" alt="Jasper Evangelista" style="height: 40px; width: auto; border-radius: 50%;">';
+          console.log('Logo successfully replaced with jaslogowebsite.png');
+          return true;
+        }
+        return false;
+      }
+
+      // Try to replace logo when page loads
       window.addEventListener('load', function() {
-        setTimeout(function() {
-          // Find elements that might contain the "JE" logo
-          const logoElements = document.querySelectorAll('*');
-          
-          logoElements.forEach(function(element) {
-            // Check if element contains "JE" text and looks like a logo
-            if (element.textContent && element.textContent.trim() === 'JE') {
-              const computedStyle = window.getComputedStyle(element);
-              const parent = element.parentElement;
-              
-              // Check if this looks like a logo element (circular, positioned, etc.)
-              if (computedStyle.borderRadius && computedStyle.borderRadius.includes('50%') ||
-                  (parent && parent.className && parent.className.toLowerCase().includes('logo'))) {
-                
-                // Replace with actual logo image
-                element.innerHTML = '<img src="/jaslogowebsite.png" alt="Jasper Evangelista" style="height: 40px; width: auto; border-radius: 50%;">';
-              }
+        // Try immediately
+        if (!replaceLogo()) {
+          // If not found, try again after React renders
+          setTimeout(function() {
+            if (!replaceLogo()) {
+              // Try one more time after a longer delay
+              setTimeout(replaceLogo, 2000);
             }
-          });
-        }, 2000); // Wait 2 seconds for React to fully render
+          }, 1000);
+        }
+      });
+
+      // Also try when DOM content is loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(replaceLogo, 500);
       });
     </script>
   </body>
