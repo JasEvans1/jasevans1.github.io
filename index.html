@@ -6,127 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jasper Evangelista | Creative Marketing Studio</title>
     <script type="module" crossorigin src="/assets/index-ti55cYL2.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ3q8.css">
-    
-    <!-- Custom Loading Screen Styles -->
-    <style>
-      /* Custom loading screen with logo */
-      .custom-loading-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease-out;
-      }
-      
-      .custom-loading-screen.fade-out {
-        opacity: 0;
-        pointer-events: none;
-      }
-      
-      .custom-logo-container {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background: rgba(0, 0, 0, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 2rem;
-        animation: pulse 2s ease-in-out infinite;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-      }
-      
-      .custom-logo-container img {
-        width: 90px;
-        height: 90px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-      
-      .loading-text {
-        color: white;
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-      }
-      
-      .loading-subtitle {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 1rem;
-        margin-bottom: 2rem;
-      }
-      
-      .loading-spinner {
-        width: 40px;
-        height: 40px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
-        border-top: 3px solid white;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      
-      @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-      }
-      
-      @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-    </style>
+    <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ8q8.css">
   </head>
   <body>
-    <!-- Custom Loading Screen -->
-    <div id="customLoadingScreen" class="custom-loading-screen">
-      <div class="custom-logo-container">
-        <img src="/jaslogowebsite.png" alt="Jasper Evangelista" />
-      </div>
-      <div class="loading-text">Jasper Evangelista</div>
-      <div class="loading-subtitle">Creative Marketing Studio</div>
-      <div class="loading-spinner"></div>
-    </div>
-    
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Enhanced Logo Replacement & Loading Screen Management -->
+    <!-- Simple Logo Replacement Script -->
     <script>
-      // Hide custom loading screen when React app loads
-      function hideCustomLoadingScreen() {
-        const loadingScreen = document.getElementById('customLoadingScreen');
-        if (loadingScreen) {
-          loadingScreen.classList.add('fade-out');
-          setTimeout(() => {
-            loadingScreen.style.display = 'none';
-          }, 500);
-        }
-      }
-      
-      // Replace navigation logo
-      function replaceNavigationLogo() {
+      function replaceLogo() {
+        // Only replace navigation logo - don't touch loading screen
         const logoContainers = document.querySelectorAll('.bg-black.rounded-full');
         
         logoContainers.forEach(function(logoContainer) {
-          // Skip if already properly replaced
-          if (logoContainer.children.length === 1 && logoContainer.children[0].tagName === 'IMG') {
+          // Skip if already has an image
+          if (logoContainer.querySelector('img')) {
             return;
           }
           
           const containerRect = logoContainer.getBoundingClientRect();
           const containerSize = Math.min(containerRect.width, containerRect.height);
           
-          // Only process navigation-sized containers
-          if (containerSize < 20 || containerSize > 60) return;
+          // Only process small navigation containers (not loading screen)
+          if (containerSize < 30 || containerSize > 60) return;
           
           const logoSize = Math.floor(containerSize * 0.75);
           
@@ -156,46 +58,33 @@
           console.log(`Navigation logo replaced (${logoSize}px)`);
         });
       }
-      
-      // Monitor for React app loading
-      function monitorReactApp() {
+
+      // Simple replacement attempts
+      function attemptLogoReplacement() {
         let attempts = 0;
-        const maxAttempts = 30;
+        const maxAttempts = 10;
         
-        function checkReactApp() {
+        function tryReplace() {
           attempts++;
           
-          // Replace navigation logos
-          replaceNavigationLogo();
+          replaceLogo();
           
-          // Check if React app has loaded (look for main content)
-          const mainContent = document.querySelector('nav, header, main, [class*="nav"], [class*="header"]');
-          
-          if (mainContent && attempts > 5) {
-            // React app has loaded, hide custom loading screen
-            setTimeout(hideCustomLoadingScreen, 1000);
-            console.log('React app detected, hiding custom loading screen');
-          } else if (attempts < maxAttempts) {
-            setTimeout(checkReactApp, 200);
-          } else {
-            // Fallback: hide loading screen after timeout
-            hideCustomLoadingScreen();
-            console.log('Timeout reached, hiding custom loading screen');
+          if (attempts < maxAttempts) {
+            setTimeout(tryReplace, 500);
           }
         }
         
-        checkReactApp();
+        tryReplace();
       }
-      
-      // Start monitoring immediately
-      monitorReactApp();
-      
-      // Also start when events fire
+
+      // Start when page loads
       window.addEventListener('load', function() {
-        setTimeout(hideCustomLoadingScreen, 2000); // Fallback timeout
+        setTimeout(attemptLogoReplacement, 200);
       });
-      
-      document.addEventListener('DOMContentLoaded', monitorReactApp);
+
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(attemptLogoReplacement, 200);
+      });
     </script>
   </body>
 </html>
