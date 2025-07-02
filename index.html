@@ -7,56 +7,34 @@
     <title>Jasper Evangelista | Creative Marketing Studio</title>
     <script type="module" crossorigin src="/assets/index-ti55cyL2.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ3q8.css">
+    
+    <!-- Logo Override CSS -->
+    <style>
+      /* Override any generic logo with the actual logo image */
+      .logo img, 
+      [class*="logo"] img,
+      [class*="Logo"] img {
+        content: url('/jaslogowebsite.png') !important;
+        height: 40px !important;
+        width: auto !important;
+      }
+      
+      /* Replace text-based "JE" logos */
+      [class*="logo"]:has-text("JE"),
+      [class*="Logo"]:has-text("JE") {
+        background-image: url('/jaslogowebsite.png') !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        text-indent: -9999px !important;
+        width: 40px !important;
+        height: 40px !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
-    
-    <!-- Logo Integration Script -->
-    <script>
-      // Wait for React app to load, then replace the generic logo with the actual logo
-      document.addEventListener('DOMContentLoaded', function() {
-        function replaceLogo() {
-          // Look for the logo element (could be img, div with background, or text)
-          const logoElements = document.querySelectorAll('img, .logo, [class*="logo"], [class*="Logo"]');
-          
-          logoElements.forEach(element => {
-            // Check if it's a generic "JE" logo or placeholder
-            if (element.tagName === 'IMG') {
-              // Replace with actual logo
-              element.src = '/jaslogowebsite.png';
-              element.alt = 'Jasper Evangelista Logo';
-            } else if (element.textContent && element.textContent.trim() === 'JE') {
-              // Replace text logo with image
-              element.innerHTML = '<img src="/jaslogowebsite.png" alt="Jasper Evangelista Logo" style="height: 40px; width: auto;">';
-            }
-          });
-          
-          // Also check for any elements with "JE" text that might be the logo
-          const textElements = document.querySelectorAll('*');
-          textElements.forEach(element => {
-            if (element.children.length === 0 && element.textContent && element.textContent.trim() === 'JE') {
-              // This might be the text logo, replace it
-              const parent = element.parentElement;
-              if (parent && (parent.className.toLowerCase().includes('logo') || 
-                           parent.className.toLowerCase().includes('brand') ||
-                           element.className.toLowerCase().includes('logo') ||
-                           element.className.toLowerCase().includes('brand'))) {
-                element.innerHTML = '<img src="/jaslogowebsite.png" alt="Jasper Evangelista Logo" style="height: 40px; width: auto;">';
-              }
-            }
-          });
-        }
-        
-        // Try to replace logo immediately
-        replaceLogo();
-        
-        // Also try after a short delay to ensure React has rendered
-        setTimeout(replaceLogo, 500);
-        setTimeout(replaceLogo, 1000);
-        setTimeout(replaceLogo, 2000);
-      });
-    </script>
   </body>
 </html>
 
