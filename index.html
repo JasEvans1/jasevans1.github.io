@@ -12,7 +12,7 @@
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Working Logo Replacement Script -->
+    <!-- Enhanced Logo Replacement Script -->
     <script>
       function replaceLogo() {
         // Find elements with "JE" text (the logo)
@@ -22,32 +22,80 @@
 
         if (jeElements.length > 0) {
           const logoElement = jeElements[0];
-          // Replace with actual logo image
-          logoElement.innerHTML = '<img src="/jaslogowebsite.png" alt="Jasper Evangelista" style="height: 40px; width: auto; border-radius: 50%;">';
-          console.log('Logo successfully replaced with jaslogowebsite.png');
+          
+          // Create image element with proper loading
+          const img = document.createElement('img');
+          img.src = '/jaslogowebsite.png';
+          img.alt = 'Jasper Evangelista';
+          img.style.cssText = `
+            height: 40px !important;
+            width: 40px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          `;
+          
+          // Handle image loading
+          img.onload = function() {
+            console.log('Logo image loaded successfully');
+          };
+          
+          img.onerror = function() {
+            console.error('Failed to load logo image');
+            // Fallback to text if image fails
+            logoElement.textContent = 'JE';
+          };
+          
+          // Replace the content
+          logoElement.innerHTML = '';
+          logoElement.appendChild(img);
+          
+          console.log('Logo replacement attempted');
           return true;
         }
         return false;
       }
 
-      // Try to replace logo when page loads
-      window.addEventListener('load', function() {
-        // Try immediately
-        if (!replaceLogo()) {
-          // If not found, try again after React renders
-          setTimeout(function() {
-            if (!replaceLogo()) {
-              // Try one more time after a longer delay
-              setTimeout(replaceLogo, 2000);
-            }
-          }, 1000);
+      // Multiple attempts to replace logo
+      function attemptLogoReplacement() {
+        let attempts = 0;
+        const maxAttempts = 10;
+        
+        function tryReplace() {
+          attempts++;
+          console.log(`Logo replacement attempt ${attempts}`);
+          
+          if (replaceLogo()) {
+            console.log('Logo replacement successful!');
+            return;
+          }
+          
+          if (attempts < maxAttempts) {
+            setTimeout(tryReplace, 500);
+          } else {
+            console.log('Logo replacement failed after maximum attempts');
+          }
         }
+        
+        tryReplace();
+      }
+
+      // Start replacement when page loads
+      window.addEventListener('load', function() {
+        setTimeout(attemptLogoReplacement, 100);
       });
 
       // Also try when DOM content is loaded
       document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(replaceLogo, 500);
+        setTimeout(attemptLogoReplacement, 100);
       });
+      
+      // Try immediately if document is already ready
+      if (document.readyState === 'complete') {
+        setTimeout(attemptLogoReplacement, 100);
+      }
     </script>
   </body>
 </html>
