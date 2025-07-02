@@ -12,35 +12,33 @@
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Final Logo Replacement Script with Perfect Centering -->
+    <!-- Comprehensive Logo Replacement Script -->
     <script>
       function replaceLogo() {
-        // Find all logo containers
-        const logoContainers = document.querySelectorAll('.bg-black.rounded-full');
-        
         let replacedCount = 0;
         
+        // Method 1: Find black circular containers
+        const logoContainers = document.querySelectorAll('.bg-black.rounded-full, .rounded-full');
+        
         logoContainers.forEach(function(logoContainer) {
-          // Skip if already properly replaced (has img as direct child)
+          // Skip if already properly replaced
           if (logoContainer.children.length === 1 && logoContainer.children[0].tagName === 'IMG') {
             return;
           }
           
-          // Get container dimensions
           const containerRect = logoContainer.getBoundingClientRect();
           const containerSize = Math.min(containerRect.width, containerRect.height);
           
-          // Determine logo size based on container size
+          // Only process if container is visible and reasonably sized
+          if (containerSize < 20) return;
+          
           let logoSize;
           if (containerSize > 50) {
-            // Larger container (loading screen) - use 80% of container size
-            logoSize = Math.floor(containerSize * 0.8);
+            logoSize = Math.floor(containerSize * 0.85); // Larger for loading screen
           } else {
-            // Smaller container (navigation) - use 70% of container size
-            logoSize = Math.floor(containerSize * 0.7);
+            logoSize = Math.floor(containerSize * 0.75); // Smaller for navigation
           }
           
-          // Create image element
           const img = document.createElement('img');
           img.src = '/jaslogowebsite.png';
           img.alt = 'Jasper Evangelista';
@@ -54,7 +52,6 @@
             padding: 0 !important;
           `;
           
-          // Ensure container uses flexbox centering
           logoContainer.style.cssText += `
             display: flex !important;
             align-items: center !important;
@@ -62,7 +59,6 @@
             position: relative !important;
           `;
           
-          // Clear container completely and add image
           logoContainer.innerHTML = '';
           logoContainer.appendChild(img);
           
@@ -70,24 +66,54 @@
           replacedCount++;
         });
         
-        if (replacedCount > 0) {
-          console.log(`Logo replacement successful! Replaced ${replacedCount} logo(s)`);
-          return true;
-        }
-        
-        // Fallback: try the original method for any remaining "JE" text
+        // Method 2: Find elements with "JE" text
         const jeElements = Array.from(document.querySelectorAll('*')).filter(el => 
           el.textContent && el.textContent.trim() === 'JE' && el.children.length === 0
         );
 
-        if (jeElements.length > 0) {
-          jeElements.forEach(function(logoElement) {
+        jeElements.forEach(function(logoElement) {
+          const img = document.createElement('img');
+          img.src = '/jaslogowebsite.png';
+          img.alt = 'Jasper Evangelista';
+          img.style.cssText = `
+            height: 50px !important;
+            width: 50px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          `;
+          
+          logoElement.innerHTML = '';
+          logoElement.appendChild(img);
+          replacedCount++;
+          console.log('Logo replaced via JE text method');
+        });
+        
+        // Method 3: Find any circular elements that might be logos
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(el => {
+          const style = window.getComputedStyle(el);
+          const rect = el.getBoundingClientRect();
+          
+          // Look for circular elements with "JE" or similar content
+          if (style.borderRadius && style.borderRadius.includes('50%') && 
+              rect.width > 40 && rect.height > 40 &&
+              el.textContent && el.textContent.trim().length <= 3 &&
+              (el.textContent.includes('JE') || el.textContent.includes('GJ'))) {
+            
+            // Skip if already has an image
+            if (el.querySelector('img')) return;
+            
+            const logoSize = Math.floor(Math.min(rect.width, rect.height) * 0.8);
+            
             const img = document.createElement('img');
             img.src = '/jaslogowebsite.png';
             img.alt = 'Jasper Evangelista';
             img.style.cssText = `
-              height: 32px !important;
-              width: 32px !important;
+              height: ${logoSize}px !important;
+              width: ${logoSize}px !important;
               border-radius: 50% !important;
               object-fit: cover !important;
               display: block !important;
@@ -95,21 +121,32 @@
               padding: 0 !important;
             `;
             
-            logoElement.innerHTML = '';
-            logoElement.appendChild(img);
-          });
-          
-          console.log('Logo element replaced with image (fallback method)');
+            el.style.cssText += `
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              position: relative !important;
+            `;
+            
+            el.innerHTML = '';
+            el.appendChild(img);
+            replacedCount++;
+            console.log(`Logo replaced via circular element method (${logoSize}px)`);
+          }
+        });
+        
+        if (replacedCount > 0) {
+          console.log(`Logo replacement successful! Replaced ${replacedCount} logo(s)`);
           return true;
         }
         
         return false;
       }
 
-      // Continuous logo replacement to handle all states
-      function attemptLogoReplacement() {
+      // Start replacement immediately and very frequently
+      function startLogoReplacement() {
         let attempts = 0;
-        const maxAttempts = 25;
+        const maxAttempts = 50; // More attempts
         
         function tryReplace() {
           attempts++;
@@ -118,7 +155,9 @@
           replaceLogo();
           
           if (attempts < maxAttempts) {
-            setTimeout(tryReplace, 150);
+            // More frequent attempts early on to catch loading screen
+            const delay = attempts < 20 ? 50 : 200;
+            setTimeout(tryReplace, delay);
           } else {
             console.log('Logo replacement monitoring completed');
           }
@@ -127,17 +166,15 @@
         tryReplace();
       }
 
-      // Start replacement immediately and continue monitoring
-      window.addEventListener('load', function() {
-        attemptLogoReplacement();
-      });
-
-      document.addEventListener('DOMContentLoaded', function() {
-        attemptLogoReplacement();
-      });
+      // Start immediately - don't wait for any events
+      startLogoReplacement();
+      
+      // Also start when events fire
+      window.addEventListener('load', startLogoReplacement);
+      document.addEventListener('DOMContentLoaded', startLogoReplacement);
       
       if (document.readyState === 'complete') {
-        attemptLogoReplacement();
+        startLogoReplacement();
       }
     </script>
   </body>
