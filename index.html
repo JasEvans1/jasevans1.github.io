@@ -12,69 +12,61 @@
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Smart Logo Replacement Script with Proper Sizing -->
+    <!-- Final Logo Replacement Script with Perfect Centering -->
     <script>
       function replaceLogo() {
-        // Find all logo containers - both loading screen and navigation
+        // Find all logo containers
         const logoContainers = document.querySelectorAll('.bg-black.rounded-full');
         
         let replacedCount = 0;
         
         logoContainers.forEach(function(logoContainer) {
-          // Skip if already has an image
-          if (logoContainer.querySelector('img')) {
+          // Skip if already properly replaced (has img as direct child)
+          if (logoContainer.children.length === 1 && logoContainer.children[0].tagName === 'IMG') {
             return;
           }
           
-          // Determine if this is the loading screen (center) or navigation (top-left)
+          // Get container dimensions
           const containerRect = logoContainer.getBoundingClientRect();
-          const isLoadingScreen = containerRect.width > 60; // Loading screen circle is larger
+          const containerSize = Math.min(containerRect.width, containerRect.height);
           
-          // Create image element with appropriate sizing
+          // Determine logo size based on container size
+          let logoSize;
+          if (containerSize > 50) {
+            // Larger container (loading screen) - use 80% of container size
+            logoSize = Math.floor(containerSize * 0.8);
+          } else {
+            // Smaller container (navigation) - use 70% of container size
+            logoSize = Math.floor(containerSize * 0.7);
+          }
+          
+          // Create image element
           const img = document.createElement('img');
           img.src = '/jaslogowebsite.png';
           img.alt = 'Jasper Evangelista';
+          img.style.cssText = `
+            height: ${logoSize}px !important;
+            width: ${logoSize}px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          `;
           
-          if (isLoadingScreen) {
-            // Larger size for loading screen
-            img.style.cssText = `
-              height: 80px !important;
-              width: 80px !important;
-              border-radius: 50% !important;
-              object-fit: cover !important;
-              display: block !important;
-              margin: 0 !important;
-              padding: 0 !important;
-              position: absolute !important;
-              top: 50% !important;
-              left: 50% !important;
-              transform: translate(-50%, -50%) !important;
-            `;
-            console.log('Replacing loading screen logo with larger size');
-          } else {
-            // Smaller size for navigation
-            img.style.cssText = `
-              height: 40px !important;
-              width: 40px !important;
-              border-radius: 50% !important;
-              object-fit: cover !important;
-              display: block !important;
-              margin: 0 !important;
-              padding: 0 !important;
-              position: absolute !important;
-              top: 0 !important;
-              left: 0 !important;
-            `;
-            console.log('Replacing navigation logo with smaller size');
-          }
+          // Ensure container uses flexbox centering
+          logoContainer.style.cssText += `
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: relative !important;
+          `;
           
-          // Make the container relative positioned
-          logoContainer.style.position = 'relative';
-          
-          // Clear the container and add the image
+          // Clear container completely and add image
           logoContainer.innerHTML = '';
           logoContainer.appendChild(img);
           
+          console.log(`Logo replaced in container (${containerSize}px) with logo size ${logoSize}px`);
           replacedCount++;
         });
         
@@ -94,8 +86,8 @@
             img.src = '/jaslogowebsite.png';
             img.alt = 'Jasper Evangelista';
             img.style.cssText = `
-              height: 60px !important;
-              width: 60px !important;
+              height: 32px !important;
+              width: 32px !important;
               border-radius: 50% !important;
               object-fit: cover !important;
               display: block !important;
@@ -114,46 +106,38 @@
         return false;
       }
 
-      // Multiple attempts to replace logo
+      // Continuous logo replacement to handle all states
       function attemptLogoReplacement() {
         let attempts = 0;
-        const maxAttempts = 20;
+        const maxAttempts = 25;
         
         function tryReplace() {
           attempts++;
           console.log(`Logo replacement attempt ${attempts}`);
           
-          if (replaceLogo()) {
-            // Continue trying for a bit longer to catch loading screen transitions
-            if (attempts < 10) {
-              setTimeout(tryReplace, 200);
-            }
-            return;
-          }
+          replaceLogo();
           
           if (attempts < maxAttempts) {
-            setTimeout(tryReplace, 200);
+            setTimeout(tryReplace, 150);
           } else {
-            console.log('Logo replacement completed after maximum attempts');
+            console.log('Logo replacement monitoring completed');
           }
         }
         
         tryReplace();
       }
 
-      // Start replacement when page loads
+      // Start replacement immediately and continue monitoring
       window.addEventListener('load', function() {
-        setTimeout(attemptLogoReplacement, 50);
+        attemptLogoReplacement();
       });
 
-      // Also try when DOM content is loaded
       document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(attemptLogoReplacement, 50);
+        attemptLogoReplacement();
       });
       
-      // Try immediately if document is already ready
       if (document.readyState === 'complete') {
-        setTimeout(attemptLogoReplacement, 50);
+        attemptLogoReplacement();
       }
     </script>
   </body>
