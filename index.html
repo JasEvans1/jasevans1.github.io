@@ -12,10 +12,42 @@
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Enhanced Logo Replacement Script -->
+    <!-- Perfect Logo Replacement Script -->
     <script>
       function replaceLogo() {
-        // Find elements with "JE" text (the logo)
+        // Find the logo container - the black circular div
+        const logoContainer = document.querySelector('.bg-black.rounded-full');
+        
+        if (logoContainer) {
+          // Create image element
+          const img = document.createElement('img');
+          img.src = '/jaslogowebsite.png';
+          img.alt = 'Jasper Evangelista';
+          img.style.cssText = `
+            height: 40px !important;
+            width: 40px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+          `;
+          
+          // Make the container relative positioned
+          logoContainer.style.position = 'relative';
+          
+          // Clear the container and add the image
+          logoContainer.innerHTML = '';
+          logoContainer.appendChild(img);
+          
+          console.log('Logo container replaced with image');
+          return true;
+        }
+        
+        // Fallback: try the original method
         const jeElements = Array.from(document.querySelectorAll('*')).filter(el => 
           el.textContent && el.textContent.trim() === 'JE' && el.children.length === 0
         );
@@ -23,7 +55,6 @@
         if (jeElements.length > 0) {
           const logoElement = jeElements[0];
           
-          // Create image element with proper loading
           const img = document.createElement('img');
           img.src = '/jaslogowebsite.png';
           img.alt = 'Jasper Evangelista';
@@ -37,31 +68,20 @@
             padding: 0 !important;
           `;
           
-          // Handle image loading
-          img.onload = function() {
-            console.log('Logo image loaded successfully');
-          };
-          
-          img.onerror = function() {
-            console.error('Failed to load logo image');
-            // Fallback to text if image fails
-            logoElement.textContent = 'JE';
-          };
-          
-          // Replace the content
           logoElement.innerHTML = '';
           logoElement.appendChild(img);
           
-          console.log('Logo replacement attempted');
+          console.log('Logo element replaced with image (fallback method)');
           return true;
         }
+        
         return false;
       }
 
       // Multiple attempts to replace logo
       function attemptLogoReplacement() {
         let attempts = 0;
-        const maxAttempts = 10;
+        const maxAttempts = 15;
         
         function tryReplace() {
           attempts++;
@@ -73,7 +93,7 @@
           }
           
           if (attempts < maxAttempts) {
-            setTimeout(tryReplace, 500);
+            setTimeout(tryReplace, 300);
           } else {
             console.log('Logo replacement failed after maximum attempts');
           }
