@@ -7,27 +7,12 @@
     <title>Jasper Evangelista | Creative Marketing Studio</title>
     <script type="module" crossorigin src="/assets/index-ti55cYL2.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ8q8.css">
-    
-    <!-- CSS to super-size the loading screen -->
-    <style>
-      /* Make the loading screen logo container much larger */
-      .loading-screen-container {
-        transform: scale(2.5) !important;
-        transform-origin: center !important;
-      }
-      
-      /* Target the loading screen specifically */
-      body > div:first-child > div:first-child {
-        transform: scale(2.5) !important;
-        transform-origin: center !important;
-      }
-    </style>
   </head>
   <body>
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Simple Logo Replacement Script - REVERTED TO WORKING VERSION -->
+    <!-- Targeted Logo Replacement Script -->
     <script>
       function replaceLogo() {
         // Find all logo containers
@@ -53,10 +38,15 @@
                                   containerRect.left < window.innerWidth * 0.7);
           
           if (isLoadingScreen) {
-            // Loading screen - make logo 90% of container (bigger than before)
+            // Loading screen - use the good 90% ratio you confirmed
             logoSize = Math.floor(containerSize * 0.9);
-            // Also mark this container for CSS scaling
-            logoContainer.classList.add('loading-screen-container');
+            
+            // Scale ONLY this specific container (not the whole page)
+            logoContainer.style.transform = 'scale(2.5)';
+            logoContainer.style.transformOrigin = 'center';
+            logoContainer.style.zIndex = '1000';
+            
+            console.log('Loading screen logo container scaled 2.5x');
           } else {
             // Navigation - keep current good proportion
             logoSize = Math.floor(containerSize * 0.75);
@@ -85,11 +75,11 @@
           logoContainer.innerHTML = '';
           logoContainer.appendChild(img);
           
-          console.log(`Logo replaced in ${containerSize}px container with ${logoSize}px logo${isLoadingScreen ? ' (LOADING SCREEN - SUPER-SIZED)' : ' (navigation)'}`);
+          console.log(`Logo replaced in ${containerSize}px container with ${logoSize}px logo${isLoadingScreen ? ' (LOADING SCREEN)' : ' (navigation)'}`);
         });
       }
 
-      // Simple replacement attempts - BACK TO WORKING VERSION
+      // Simple replacement attempts
       function attemptLogoReplacement() {
         let attempts = 0;
         const maxAttempts = 10;
@@ -107,7 +97,7 @@
         tryReplace();
       }
 
-      // Start when page loads - SIMPLE AND RELIABLE
+      // Start when page loads
       window.addEventListener('load', function() {
         setTimeout(attemptLogoReplacement, 200);
       });
