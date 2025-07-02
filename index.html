@@ -7,18 +7,31 @@
     <title>Jasper Evangelista | Creative Marketing Studio</title>
     <script type="module" crossorigin src="/assets/index-ti55cYL2.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ8q8.css">
+    
+    <!-- CSS to super-size the loading screen -->
+    <style>
+      /* Make the loading screen logo container much larger */
+      .loading-screen-container {
+        transform: scale(2.5) !important;
+        transform-origin: center !important;
+      }
+      
+      /* Target the loading screen specifically */
+      body > div:first-child > div:first-child {
+        transform: scale(2.5) !important;
+        transform-origin: center !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Large Center Logo Replacement Script -->
+    <!-- Simple Logo Replacement Script - REVERTED TO WORKING VERSION -->
     <script>
       function replaceLogo() {
-        let replacedCount = 0;
-        
-        // Method 1: Find all black circular containers
-        const logoContainers = document.querySelectorAll('.bg-black.rounded-full, .rounded-full, [class*="rounded-full"]');
+        // Find all logo containers
+        const logoContainers = document.querySelectorAll('.bg-black.rounded-full');
         
         logoContainers.forEach(function(logoContainer) {
           // Skip if already has an image
@@ -34,13 +47,19 @@
           
           let logoSize;
           
-          // Determine context and apply appropriate sizing
-          if (containerSize > 50) {
-            // Large container (loading screen) - make it MUCH bigger (400% as requested)
-            logoSize = Math.floor(containerSize * 1.2); // 120% of container (extends beyond)
+          // Check if this is likely the loading screen (larger container or centered)
+          const isLoadingScreen = containerSize > 50 || 
+                                 (containerRect.left > window.innerWidth * 0.3 && 
+                                  containerRect.left < window.innerWidth * 0.7);
+          
+          if (isLoadingScreen) {
+            // Loading screen - make logo 90% of container (bigger than before)
+            logoSize = Math.floor(containerSize * 0.9);
+            // Also mark this container for CSS scaling
+            logoContainer.classList.add('loading-screen-container');
           } else {
-            // Small container (navigation) - keep current proportion
-            logoSize = Math.floor(containerSize * 0.75); // 75% of container
+            // Navigation - keep current good proportion
+            logoSize = Math.floor(containerSize * 0.75);
           }
           
           const img = document.createElement('img');
@@ -54,7 +73,6 @@
             display: block !important;
             margin: 0 !important;
             padding: 0 !important;
-            z-index: 10 !important;
           `;
           
           logoContainer.style.cssText += `
@@ -62,134 +80,41 @@
             align-items: center !important;
             justify-content: center !important;
             position: relative !important;
-            overflow: visible !important;
           `;
           
           logoContainer.innerHTML = '';
           logoContainer.appendChild(img);
           
-          console.log(`Logo replaced in ${containerSize}px container with ${logoSize}px logo`);
-          replacedCount++;
+          console.log(`Logo replaced in ${containerSize}px container with ${logoSize}px logo${isLoadingScreen ? ' (LOADING SCREEN - SUPER-SIZED)' : ' (navigation)'}`);
         });
-        
-        // Method 2: Find any circular elements that might be logos
-        const allElements = document.querySelectorAll('*');
-        allElements.forEach(el => {
-          const style = window.getComputedStyle(el);
-          const rect = el.getBoundingClientRect();
-          
-          // Look for circular elements with potential logo content
-          if (style.borderRadius && style.borderRadius.includes('50%') && 
-              rect.width > 40 && rect.height > 40 &&
-              !el.querySelector('img')) {
-            
-            const containerSize = Math.min(rect.width, rect.height);
-            
-            // Make loading screen logos VERY large (400%+)
-            const logoSize = Math.floor(containerSize * 1.5); // 150% of container
-            
-            const img = document.createElement('img');
-            img.src = '/jaslogowebsite.png';
-            img.alt = 'Jasper Evangelista';
-            img.style.cssText = `
-              height: ${logoSize}px !important;
-              width: ${logoSize}px !important;
-              border-radius: 50% !important;
-              object-fit: cover !important;
-              display: block !important;
-              margin: 0 !important;
-              padding: 0 !important;
-              z-index: 10 !important;
-            `;
-            
-            el.style.cssText += `
-              display: flex !important;
-              align-items: center !important;
-              justify-content: center !important;
-              position: relative !important;
-              overflow: visible !important;
-            `;
-            
-            el.innerHTML = '';
-            el.appendChild(img);
-            
-            console.log(`Large logo replaced via circular element method (${logoSize}px)`);
-            replacedCount++;
-          }
-        });
-        
-        // Method 3: Find elements with "JE" text and make them HUGE
-        const jeElements = Array.from(document.querySelectorAll('*')).filter(el => 
-          el.textContent && el.textContent.trim() === 'JE' && el.children.length === 0
-        );
-
-        jeElements.forEach(function(logoElement) {
-          const rect = logoElement.getBoundingClientRect();
-          const containerSize = Math.min(rect.width, rect.height);
-          
-          // Make JE replacement VERY large
-          const logoSize = Math.max(80, Math.floor(containerSize * 2)); // At least 80px or 200% of container
-          
-          const img = document.createElement('img');
-          img.src = '/jaslogowebsite.png';
-          img.alt = 'Jasper Evangelista';
-          img.style.cssText = `
-            height: ${logoSize}px !important;
-            width: ${logoSize}px !important;
-            border-radius: 50% !important;
-            object-fit: cover !important;
-            display: block !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            z-index: 10 !important;
-          `;
-          
-          logoElement.innerHTML = '';
-          logoElement.appendChild(img);
-          replacedCount++;
-          console.log(`Large JE logo replaced (${logoSize}px)`);
-        });
-        
-        if (replacedCount > 0) {
-          console.log(`Logo replacement successful! Replaced ${replacedCount} logo(s)`);
-          return true;
-        }
-        
-        return false;
       }
 
-      // Aggressive logo replacement
+      // Simple replacement attempts - BACK TO WORKING VERSION
       function attemptLogoReplacement() {
         let attempts = 0;
-        const maxAttempts = 25;
+        const maxAttempts = 10;
         
         function tryReplace() {
           attempts++;
-          console.log(`Logo replacement attempt ${attempts}`);
           
           replaceLogo();
           
           if (attempts < maxAttempts) {
-            // Very frequent attempts early on
-            const delay = attempts < 15 ? 100 : 300;
-            setTimeout(tryReplace, delay);
-          } else {
-            console.log('Logo replacement completed');
+            setTimeout(tryReplace, 500);
           }
         }
         
         tryReplace();
       }
 
-      // Start immediately and aggressively
-      attemptLogoReplacement();
-      
-      window.addEventListener('load', attemptLogoReplacement);
-      document.addEventListener('DOMContentLoaded', attemptLogoReplacement);
-      
-      if (document.readyState === 'complete') {
-        attemptLogoReplacement();
-      }
+      // Start when page loads - SIMPLE AND RELIABLE
+      window.addEventListener('load', function() {
+        setTimeout(attemptLogoReplacement, 200);
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(attemptLogoReplacement, 200);
+      });
     </script>
   </body>
 </html>
