@@ -12,69 +12,87 @@
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Remove Black Circle and Enlarge Center Logo Script -->
+    <!-- Simple, Direct Logo Replacement -->
     <script>
       function replaceLogo() {
-        // Find all logo containers
+        // Method 1: Replace all black circular containers
         const logoContainers = document.querySelectorAll('.bg-black.rounded-full');
         
         logoContainers.forEach(function(logoContainer) {
+          // Skip if already has an image as direct child
+          if (logoContainer.children.length === 1 && logoContainer.children[0].tagName === 'IMG') {
+            return;
+          }
+          
           const containerRect = logoContainer.getBoundingClientRect();
           const containerSize = Math.min(containerRect.width, containerRect.height);
           
           // Only process visible containers
           if (containerSize < 20) return;
           
-          // Check if this is the center loading screen (larger and centered)
-          const isLoadingScreen = containerSize > 50 && 
-                                 containerRect.left > window.innerWidth * 0.3 && 
-                                 containerRect.left < window.innerWidth * 0.7 &&
-                                 containerRect.top > window.innerHeight * 0.2 &&
-                                 containerRect.top < window.innerHeight * 0.8;
+          // Determine size based on container
+          let logoSize = Math.floor(containerSize * 0.75);
           
-          if (isLoadingScreen) {
-            // This is the center loading screen - remove black circle and show large logo
+          // Create image
+          const img = document.createElement('img');
+          img.src = '/jaslogowebsite.png';
+          img.alt = 'Jasper Evangelista';
+          img.style.cssText = `
+            height: ${logoSize}px !important;
+            width: ${logoSize}px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+          `;
+          
+          // Ensure container is set up for centering
+          logoContainer.style.cssText += `
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            position: relative !important;
+          `;
+          
+          // Clear container and add image
+          logoContainer.innerHTML = '';
+          logoContainer.appendChild(img);
+          
+          console.log(`Logo replaced in ${containerSize}px container with ${logoSize}px image`);
+        });
+        
+        // Method 2: Find and replace any "JE" text elements
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(function(element) {
+          if (element.textContent && element.textContent.trim() === 'JE' && 
+              element.children.length === 0) {
             
-            // Create large logo without black circle
             const img = document.createElement('img');
             img.src = '/jaslogowebsite.png';
             img.alt = 'Jasper Evangelista';
             img.style.cssText = `
-              height: 120px !important;
-              width: 120px !important;
+              height: 32px !important;
+              width: 32px !important;
               border-radius: 50% !important;
               object-fit: cover !important;
-              display: block !important;
+              display: inline-block !important;
               margin: 0 !important;
               padding: 0 !important;
             `;
             
-            // Remove black background and make container transparent
-            logoContainer.style.cssText = `
-              background: transparent !important;
-              border: none !important;
-              display: flex !important;
-              align-items: center !important;
-              justify-content: center !important;
-              position: relative !important;
-            `;
+            element.innerHTML = '';
+            element.appendChild(img);
             
-            logoContainer.innerHTML = '';
-            logoContainer.appendChild(img);
-            
-            console.log('Center loading screen: Black circle removed, large logo (120px) added');
-          } else {
-            // This is navigation - DON'T TOUCH IT, leave it exactly as is
-            console.log('Navigation logo detected - leaving unchanged');
-            return;
+            console.log('JE text replaced with logo image');
           }
         });
       }
 
-      // Simple replacement attempts
-      function attemptLogoReplacement() {
+      // Run replacement multiple times
+      function startLogoReplacement() {
         let attempts = 0;
-        const maxAttempts = 8;
+        const maxAttempts = 12;
         
         function tryReplace() {
           attempts++;
@@ -83,7 +101,7 @@
           replaceLogo();
           
           if (attempts < maxAttempts) {
-            setTimeout(tryReplace, 600);
+            setTimeout(tryReplace, 400);
           } else {
             console.log('Logo replacement completed');
           }
@@ -92,14 +110,11 @@
         tryReplace();
       }
 
-      // Start when page loads
-      window.addEventListener('load', function() {
-        setTimeout(attemptLogoReplacement, 300);
-      });
-
-      document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(attemptLogoReplacement, 300);
-      });
+      // Start replacement
+      startLogoReplacement();
+      
+      window.addEventListener('load', startLogoReplacement);
+      document.addEventListener('DOMContentLoaded', startLogoReplacement);
     </script>
   </body>
 </html>
