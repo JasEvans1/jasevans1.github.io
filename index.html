@@ -8,136 +8,24 @@
     <script type="module" crossorigin src="/assets/index-ti55cYL2.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ8q8.css">
     
-    <!-- CSS Logo Override -->
+    <!-- Simple CSS to remove black circle only -->
     <style>
-      /* Hide JE text and show logo image instead */
+      /* Remove black background from logo containers only */
+      .bg-black.rounded-full {
+        background-color: transparent !important;
+        background: transparent !important;
+      }
+      
+      /* Keep text visible and normal */
       .bg-black.rounded-full span {
-        color: transparent !important;
-        background-image: url('/jaslogowebsite.png') !important;
-        background-size: 80% 80% !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        display: block !important;
-        width: 100% !important;
-        height: 100% !important;
-      }
-      
-      /* Alternative targeting for any JE text */
-      span:contains("JE") {
-        color: transparent !important;
-        background-image: url('/jaslogowebsite.png') !important;
-        background-size: 80% 80% !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-      }
-      
-      /* Target any element with JE text content */
-      *:not(script):not(style) {
-        font-size: inherit;
-      }
-      
-      /* Specific override for logo containers */
-      .w-10.h-10.bg-black.rounded-full.flex.items-center.justify-center span,
-      .bg-black.rounded-full span.text-white {
-        text-indent: -9999px !important;
-        background-image: url('/jaslogowebsite.png') !important;
-        background-size: 75% 75% !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        display: block !important;
-        width: 100% !important;
-        height: 100% !important;
+        color: black !important;
+        font-weight: bold !important;
       }
     </style>
   </head>
   <body>
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
-    
-    <!-- Backup JavaScript for additional replacement -->
-    <script>
-      function forceLogoReplacement() {
-        // Find all elements containing "JE" text
-        const walker = document.createTreeWalker(
-          document.body,
-          NodeFilter.SHOW_TEXT,
-          null,
-          false
-        );
-        
-        const textNodes = [];
-        let node;
-        
-        while (node = walker.nextNode()) {
-          if (node.textContent.trim() === 'JE') {
-            textNodes.push(node);
-          }
-        }
-        
-        textNodes.forEach(function(textNode) {
-          const parent = textNode.parentElement;
-          if (parent) {
-            // Hide text and add background image
-            parent.style.cssText += `
-              color: transparent !important;
-              background-image: url('/jaslogowebsite.png') !important;
-              background-size: 75% 75% !important;
-              background-position: center !important;
-              background-repeat: no-repeat !important;
-              text-indent: -9999px !important;
-            `;
-            console.log('JE text hidden and logo background applied');
-          }
-        });
-        
-        // Also target black circular containers directly
-        const containers = document.querySelectorAll('.bg-black.rounded-full');
-        containers.forEach(function(container) {
-          const spans = container.querySelectorAll('span');
-          spans.forEach(function(span) {
-            if (span.textContent.trim() === 'JE') {
-              span.style.cssText += `
-                color: transparent !important;
-                background-image: url('/jaslogowebsite.png') !important;
-                background-size: 75% 75% !important;
-                background-position: center !important;
-                background-repeat: no-repeat !important;
-                text-indent: -9999px !important;
-                display: block !important;
-                width: 100% !important;
-                height: 100% !important;
-              `;
-              console.log('Container span logo background applied');
-            }
-          });
-        });
-      }
-
-      // Run replacement multiple times
-      function startReplacement() {
-        let attempts = 0;
-        const maxAttempts = 8;
-        
-        function tryReplace() {
-          attempts++;
-          console.log(`CSS logo override attempt ${attempts}`);
-          
-          forceLogoReplacement();
-          
-          if (attempts < maxAttempts) {
-            setTimeout(tryReplace, 500);
-          }
-        }
-        
-        tryReplace();
-      }
-
-      // Start immediately
-      startReplacement();
-      
-      window.addEventListener('load', startReplacement);
-      document.addEventListener('DOMContentLoaded', startReplacement);
-    </script>
   </body>
 </html>
 
