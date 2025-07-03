@@ -8,24 +8,109 @@
     <script type="module" crossorigin src="/assets/index-ti55cYL2.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ8q8.css">
     
-    <!-- Simple CSS to remove black circle only -->
+    <!-- Aggressive CSS to remove ALL black circles -->
     <style>
-      /* Remove black background from logo containers only */
-      .bg-black.rounded-full {
+      /* Target all possible black circle variations */
+      .bg-black.rounded-full,
+      .bg-black.rounded-full *,
+      [class*="bg-black"][class*="rounded-full"],
+      [class*="bg-black"][class*="rounded"],
+      div[class*="bg-black"],
+      span[class*="bg-black"] {
+        background-color: transparent !important;
+        background: transparent !important;
+        background-image: none !important;
+      }
+      
+      /* Target by style attributes too */
+      [style*="background-color: black"],
+      [style*="background: black"],
+      [style*="background-color: #000"],
+      [style*="background: #000"] {
         background-color: transparent !important;
         background: transparent !important;
       }
       
-      /* Keep text visible and normal */
-      .bg-black.rounded-full span {
+      /* Make sure text is visible */
+      .bg-black.rounded-full span,
+      [class*="bg-black"] span,
+      [class*="bg-black"] {
         color: black !important;
         font-weight: bold !important;
+      }
+      
+      /* Target loading screen specifically */
+      body > div > div > div[class*="flex"][class*="items-center"][class*="justify-center"] div[class*="bg-black"],
+      body > div > div div[class*="bg-black"][class*="rounded-full"] {
+        background-color: transparent !important;
+        background: transparent !important;
+      }
+      
+      /* Nuclear option - remove black background from anything circular */
+      [class*="rounded-full"] {
+        background-color: transparent !important;
+        background: transparent !important;
+      }
+      
+      [class*="rounded-full"] * {
+        background-color: inherit !important;
       }
     </style>
   </head>
   <body>
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
+    
+    <!-- Backup JavaScript to force removal -->
+    <script>
+      function forceRemoveBlackCircles() {
+        // Find all elements with black backgrounds
+        const allElements = document.querySelectorAll('*');
+        
+        allElements.forEach(function(element) {
+          const computedStyle = window.getComputedStyle(element);
+          const classList = element.className;
+          
+          // Check if element has black background
+          if (classList.includes('bg-black') || 
+              classList.includes('rounded-full') ||
+              computedStyle.backgroundColor === 'rgb(0, 0, 0)' ||
+              computedStyle.backgroundColor === 'black') {
+            
+            element.style.backgroundColor = 'transparent';
+            element.style.background = 'transparent';
+            element.style.backgroundImage = 'none';
+            
+            console.log('Removed black background from element:', element.className);
+          }
+        });
+      }
+
+      // Run removal multiple times
+      function startRemoval() {
+        let attempts = 0;
+        const maxAttempts = 10;
+        
+        function tryRemove() {
+          attempts++;
+          console.log(`Black circle removal attempt ${attempts}`);
+          
+          forceRemoveBlackCircles();
+          
+          if (attempts < maxAttempts) {
+            setTimeout(tryRemove, 300);
+          }
+        }
+        
+        tryRemove();
+      }
+
+      // Start immediately and repeatedly
+      startRemoval();
+      
+      window.addEventListener('load', startRemoval);
+      document.addEventListener('DOMContentLoaded', startRemoval);
+    </script>
   </body>
 </html>
 
