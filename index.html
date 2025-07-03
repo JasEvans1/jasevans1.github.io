@@ -11,6 +11,78 @@
   <body>
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
+    
+    <!-- Simple Logo Integration Script -->
+    <script>
+      function replaceJEWithLogo() {
+        // Find all elements that contain "JE" text
+        const allElements = document.querySelectorAll('*');
+        
+        allElements.forEach(function(element) {
+          // Check if element contains only "JE" text (no other children)
+          if (element.textContent && element.textContent.trim() === 'JE' && 
+              element.children.length === 0) {
+            
+            // Get the parent container to determine sizing
+            const parentRect = element.parentElement ? element.parentElement.getBoundingClientRect() : element.getBoundingClientRect();
+            const containerSize = Math.min(parentRect.width, parentRect.height);
+            
+            // Determine appropriate logo size (75% of container)
+            const logoSize = Math.max(24, Math.floor(containerSize * 0.75));
+            
+            // Create logo image
+            const img = document.createElement('img');
+            img.src = '/jaslogowebsite.png';
+            img.alt = 'Jasper Evangelista';
+            img.style.cssText = `
+              height: ${logoSize}px !important;
+              width: ${logoSize}px !important;
+              border-radius: 50% !important;
+              object-fit: cover !important;
+              display: inline-block !important;
+              margin: 0 !important;
+              padding: 0 !important;
+            `;
+            
+            // Replace the JE text with the logo
+            element.innerHTML = '';
+            element.appendChild(img);
+            
+            console.log(`JE text replaced with ${logoSize}px logo`);
+          }
+        });
+      }
+
+      // Run logo replacement
+      function startLogoIntegration() {
+        let attempts = 0;
+        const maxAttempts = 8;
+        
+        function tryReplace() {
+          attempts++;
+          console.log(`Logo integration attempt ${attempts}`);
+          
+          replaceJEWithLogo();
+          
+          if (attempts < maxAttempts) {
+            setTimeout(tryReplace, 500);
+          } else {
+            console.log('Logo integration completed');
+          }
+        }
+        
+        tryReplace();
+      }
+
+      // Start logo integration when page loads
+      window.addEventListener('load', function() {
+        setTimeout(startLogoIntegration, 200);
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(startLogoIntegration, 200);
+      });
+    </script>
   </body>
 </html>
 
