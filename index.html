@@ -7,114 +7,136 @@
     <title>Jasper Evangelista | Creative Marketing Studio</title>
     <script type="module" crossorigin src="/assets/index-ti55cYL2.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ8q8.css">
+    
+    <!-- CSS Logo Override -->
+    <style>
+      /* Hide JE text and show logo image instead */
+      .bg-black.rounded-full span {
+        color: transparent !important;
+        background-image: url('/jaslogowebsite.png') !important;
+        background-size: 80% 80% !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+      
+      /* Alternative targeting for any JE text */
+      span:contains("JE") {
+        color: transparent !important;
+        background-image: url('/jaslogowebsite.png') !important;
+        background-size: 80% 80% !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+      }
+      
+      /* Target any element with JE text content */
+      *:not(script):not(style) {
+        font-size: inherit;
+      }
+      
+      /* Specific override for logo containers */
+      .w-10.h-10.bg-black.rounded-full.flex.items-center.justify-center span,
+      .bg-black.rounded-full span.text-white {
+        text-indent: -9999px !important;
+        background-image: url('/jaslogowebsite.png') !important;
+        background-size: 75% 75% !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Simple, Direct Logo Replacement -->
+    <!-- Backup JavaScript for additional replacement -->
     <script>
-      function replaceLogo() {
-        // Method 1: Replace all black circular containers
-        const logoContainers = document.querySelectorAll('.bg-black.rounded-full');
+      function forceLogoReplacement() {
+        // Find all elements containing "JE" text
+        const walker = document.createTreeWalker(
+          document.body,
+          NodeFilter.SHOW_TEXT,
+          null,
+          false
+        );
         
-        logoContainers.forEach(function(logoContainer) {
-          // Skip if already has an image as direct child
-          if (logoContainer.children.length === 1 && logoContainer.children[0].tagName === 'IMG') {
-            return;
+        const textNodes = [];
+        let node;
+        
+        while (node = walker.nextNode()) {
+          if (node.textContent.trim() === 'JE') {
+            textNodes.push(node);
           }
-          
-          const containerRect = logoContainer.getBoundingClientRect();
-          const containerSize = Math.min(containerRect.width, containerRect.height);
-          
-          // Only process visible containers
-          if (containerSize < 20) return;
-          
-          // Determine size based on container
-          let logoSize = Math.floor(containerSize * 0.75);
-          
-          // Create image
-          const img = document.createElement('img');
-          img.src = '/jaslogowebsite.png';
-          img.alt = 'Jasper Evangelista';
-          img.style.cssText = `
-            height: ${logoSize}px !important;
-            width: ${logoSize}px !important;
-            border-radius: 50% !important;
-            object-fit: cover !important;
-            display: block !important;
-            margin: 0 !important;
-            padding: 0 !important;
-          `;
-          
-          // Ensure container is set up for centering
-          logoContainer.style.cssText += `
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            position: relative !important;
-          `;
-          
-          // Clear container and add image
-          logoContainer.innerHTML = '';
-          logoContainer.appendChild(img);
-          
-          console.log(`Logo replaced in ${containerSize}px container with ${logoSize}px image`);
+        }
+        
+        textNodes.forEach(function(textNode) {
+          const parent = textNode.parentElement;
+          if (parent) {
+            // Hide text and add background image
+            parent.style.cssText += `
+              color: transparent !important;
+              background-image: url('/jaslogowebsite.png') !important;
+              background-size: 75% 75% !important;
+              background-position: center !important;
+              background-repeat: no-repeat !important;
+              text-indent: -9999px !important;
+            `;
+            console.log('JE text hidden and logo background applied');
+          }
         });
         
-        // Method 2: Find and replace any "JE" text elements
-        const allElements = document.querySelectorAll('*');
-        allElements.forEach(function(element) {
-          if (element.textContent && element.textContent.trim() === 'JE' && 
-              element.children.length === 0) {
-            
-            const img = document.createElement('img');
-            img.src = '/jaslogowebsite.png';
-            img.alt = 'Jasper Evangelista';
-            img.style.cssText = `
-              height: 32px !important;
-              width: 32px !important;
-              border-radius: 50% !important;
-              object-fit: cover !important;
-              display: inline-block !important;
-              margin: 0 !important;
-              padding: 0 !important;
-            `;
-            
-            element.innerHTML = '';
-            element.appendChild(img);
-            
-            console.log('JE text replaced with logo image');
-          }
+        // Also target black circular containers directly
+        const containers = document.querySelectorAll('.bg-black.rounded-full');
+        containers.forEach(function(container) {
+          const spans = container.querySelectorAll('span');
+          spans.forEach(function(span) {
+            if (span.textContent.trim() === 'JE') {
+              span.style.cssText += `
+                color: transparent !important;
+                background-image: url('/jaslogowebsite.png') !important;
+                background-size: 75% 75% !important;
+                background-position: center !important;
+                background-repeat: no-repeat !important;
+                text-indent: -9999px !important;
+                display: block !important;
+                width: 100% !important;
+                height: 100% !important;
+              `;
+              console.log('Container span logo background applied');
+            }
+          });
         });
       }
 
       // Run replacement multiple times
-      function startLogoReplacement() {
+      function startReplacement() {
         let attempts = 0;
-        const maxAttempts = 12;
+        const maxAttempts = 8;
         
         function tryReplace() {
           attempts++;
-          console.log(`Logo replacement attempt ${attempts}`);
+          console.log(`CSS logo override attempt ${attempts}`);
           
-          replaceLogo();
+          forceLogoReplacement();
           
           if (attempts < maxAttempts) {
-            setTimeout(tryReplace, 400);
-          } else {
-            console.log('Logo replacement completed');
+            setTimeout(tryReplace, 500);
           }
         }
         
         tryReplace();
       }
 
-      // Start replacement
-      startLogoReplacement();
+      // Start immediately
+      startReplacement();
       
-      window.addEventListener('load', startLogoReplacement);
-      document.addEventListener('DOMContentLoaded', startLogoReplacement);
+      window.addEventListener('load', startReplacement);
+      document.addEventListener('DOMContentLoaded', startReplacement);
     </script>
   </body>
 </html>
