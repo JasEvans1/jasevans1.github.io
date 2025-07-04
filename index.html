@@ -8,7 +8,7 @@
     <script type="module" crossorigin src="/assets/index-ti55cYL2.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ8q8.css">
     
-    <!-- Direct CSS logo replacement -->
+    <!-- CSS logo replacement with larger center logo -->
     <style>
       /* Hide all black circles and JE text */
       .bg-black.rounded-full,
@@ -18,7 +18,7 @@
         text-indent: -9999px !important;
       }
       
-      /* Show logo image directly */
+      /* Default logo size for navigation */
       .bg-black.rounded-full {
         background-image: url('jaslogowebsite.png') !important;
         background-size: 80% 80% !important;
@@ -28,30 +28,63 @@
         height: 40px !important;
         display: inline-block !important;
       }
+      
+      /* Larger logo for loading screen (center positioned elements) */
+      .loading-screen-logo {
+        background-size: 90% 90% !important;
+        width: 100px !important;
+        height: 100px !important;
+        transform: scale(1.5) !important;
+      }
     </style>
   </head>
   <body>
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Aggressive JavaScript replacement -->
+    <!-- Enhanced JavaScript with larger center logo -->
     <script>
       function forceLogoDisplay() {
         // Method 1: Replace all black circles with logo
         const circles = document.querySelectorAll('.bg-black.rounded-full, [class*="bg-black"][class*="rounded"]');
         circles.forEach(function(circle) {
-          circle.style.cssText = `
-            background-image: url('jaslogowebsite.png') !important;
-            background-size: 80% 80% !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-            background-color: transparent !important;
-            width: 40px !important;
-            height: 40px !important;
-            display: inline-block !important;
-          `;
+          const rect = circle.getBoundingClientRect();
+          const isCenter = rect.left > window.innerWidth * 0.3 && 
+                          rect.left < window.innerWidth * 0.7 &&
+                          rect.top > window.innerHeight * 0.2 &&
+                          rect.top < window.innerHeight * 0.8;
+          
+          if (isCenter || rect.width > 50) {
+            // This is the loading screen - make it larger
+            circle.style.cssText = `
+              background-image: url('jaslogowebsite.png') !important;
+              background-size: 90% 90% !important;
+              background-position: center !important;
+              background-repeat: no-repeat !important;
+              background-color: transparent !important;
+              width: 100px !important;
+              height: 100px !important;
+              display: inline-block !important;
+              transform: scale(1.5) !important;
+            `;
+            circle.classList.add('loading-screen-logo');
+            console.log('Large center logo applied');
+          } else {
+            // This is navigation - keep normal size
+            circle.style.cssText = `
+              background-image: url('jaslogowebsite.png') !important;
+              background-size: 80% 80% !important;
+              background-position: center !important;
+              background-repeat: no-repeat !important;
+              background-color: transparent !important;
+              width: 40px !important;
+              height: 40px !important;
+              display: inline-block !important;
+            `;
+            console.log('Normal navigation logo applied');
+          }
+          
           circle.innerHTML = '';
-          console.log('Circle replaced with logo background');
         });
         
         // Method 2: Find and replace JE text directly
@@ -65,11 +98,22 @@
         let node;
         while (node = walker.nextNode()) {
           if (node.textContent.trim() === 'JE') {
+            const rect = node.parentElement.getBoundingClientRect();
+            const isCenter = rect.left > window.innerWidth * 0.3 && 
+                            rect.left < window.innerWidth * 0.7;
+            
             const img = document.createElement('img');
             img.src = 'jaslogowebsite.png';
-            img.style.cssText = 'width: 32px; height: 32px; display: inline-block;';
+            
+            if (isCenter) {
+              img.style.cssText = 'width: 80px; height: 80px; display: inline-block;';
+              console.log('Large center logo image created');
+            } else {
+              img.style.cssText = 'width: 32px; height: 32px; display: inline-block;';
+              console.log('Normal navigation logo image created');
+            }
+            
             node.parentNode.replaceChild(img, node);
-            console.log('JE text replaced with logo image');
             break;
           }
         }
