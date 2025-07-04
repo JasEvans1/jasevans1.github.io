@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jasper Evangelista | Creative Marketing Studio</title>
+    <title>Jasper Evangelista | The Brand Jedi</title>
     <script type="module" crossorigin src="/assets/index-ti55cYL2.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ8q8.css">
     
-    <!-- Final fixes CSS -->
+    <!-- Final corrections CSS -->
     <style>
       /* Hide all black circles and JE text */
       .bg-black.rounded-full,
@@ -33,17 +33,23 @@
       /* MUCH larger logo for loading screen */
       .loading-screen-logo {
         background-size: 90% 90% !important;
-        width: 200px !important; /* Even bigger */
-        height: 200px !important;
-        transform: scale(1.5) !important; /* 300px effective size */
+        width: 300px !important; /* EVEN BIGGER */
+        height: 300px !important;
+        transform: scale(1.5) !important; /* 450px effective size */
       }
       
-      /* INCREASE headline font size */
+      /* INCREASE headline font size - UNIFIED and BIGGER */
       h1, .text-5xl, .text-6xl, .text-7xl, 
-      [class*="text-5xl"], [class*="text-6xl"], [class*="text-7xl"],
-      [class*="text-"] {
-        font-size: 125% !important; /* INCREASE by 25% */
+      [class*="text-5xl"], [class*="text-6xl"], [class*="text-7xl"] {
+        font-size: 200% !important; /* MUCH BIGGER */
         line-height: 1.2 !important;
+      }
+      
+      /* Make subhead smaller than headline */
+      p, .text-base, .text-lg, .text-xl, .text-2xl,
+      [class*="text-base"], [class*="text-lg"], [class*="text-xl"], [class*="text-2xl"] {
+        font-size: 100% !important; /* Normal size */
+        line-height: 1.5 !important;
       }
       
       /* Fix Home button */
@@ -76,9 +82,9 @@
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Final fixes JavaScript -->
+    <!-- Final corrections JavaScript -->
     <script>
-      function applyFinalFixes() {
+      function applyFinalCorrections() {
         // Method 1: Replace all black circles with logo
         const circles = document.querySelectorAll('.bg-black.rounded-full, [class*="bg-black"][class*="rounded"]');
         circles.forEach(function(circle) {
@@ -96,8 +102,8 @@
               background-position: center !important;
               background-repeat: no-repeat !important;
               background-color: transparent !important;
-              width: 200px !important;
-              height: 200px !important;
+              width: 300px !important;
+              height: 300px !important;
               display: inline-block !important;
               transform: scale(1.5) !important;
             `;
@@ -117,44 +123,16 @@
               vertical-align: middle !important;
               position: relative !important;
             `;
-            
-            // Add jasperevangelista text BESIDE the logo
-            const parent = circle.parentElement;
-            if (parent && !parent.querySelector('.jasper-text-added')) {
-              // Clear any existing content
-              while (parent.firstChild) {
-                if (parent.firstChild === circle) {
-                  break;
-                }
-                parent.removeChild(parent.firstChild);
-              }
-              
-              // Add the logo (already there)
-              
-              // Add the text span
-              const textSpan = document.createElement('span');
-              textSpan.className = 'jasper-text-added';
-              textSpan.innerHTML = '<span class="jasper-part">jasper</span><span class="evangelista-part">evangelista</span>';
-              textSpan.style.cssText = `
-                display: inline-block !important;
-                margin-left: 10px !important;
-                font-size: 24px !important;
-                vertical-align: middle !important;
-              `;
-              
-              parent.appendChild(textSpan);
-              console.log('Added "jasperevangelista" BESIDE the logo');
-            }
           }
         });
         
-        // Method 2: INCREASE "Be Fearless" headline size
+        // Method 2: INCREASE "Be Fearless" headline size - UNIFIED and BIGGER
         const headlines = document.querySelectorAll('h1, .text-5xl, .text-6xl, .text-7xl, [class*="text-5xl"], [class*="text-6xl"], [class*="text-7xl"]');
         headlines.forEach(function(headline) {
           if (headline.textContent.includes('Fearless') || headline.textContent.includes('Brand') || headline.textContent.includes('Empire')) {
-            headline.style.fontSize = '125%';
+            headline.style.fontSize = '200%';
             headline.style.lineHeight = '1.2';
-            console.log('INCREASED "Be Fearless" headline size by 25%');
+            console.log('INCREASED "Be Fearless" headline size - UNIFIED and BIGGER');
           }
         });
         
@@ -169,54 +147,118 @@
           }
         });
         
-        // Method 4: Direct approach to add jasperevangelista to header
-        const header = document.querySelector('header') || document.querySelector('nav') || document.querySelector('div[class*="flex"][class*="items-center"][class*="justify-between"]');
+        // Method 4: CRITICAL - Add jasperevangelista to header
+        // First, find the header or navigation area
+        const possibleHeaders = [
+          document.querySelector('header'),
+          document.querySelector('nav'),
+          document.querySelector('div[class*="flex"][class*="items-center"][class*="justify-between"]'),
+          document.querySelector('div[class*="flex"][class*="items-center"]'),
+          document.querySelector('div[class*="flex"]')
+        ];
+        
+        let header = null;
+        for (let i = 0; i < possibleHeaders.length; i++) {
+          if (possibleHeaders[i]) {
+            header = possibleHeaders[i];
+            break;
+          }
+        }
+        
         if (header) {
-          const logo = header.querySelector('.bg-black.rounded-full') || header.querySelector('[class*="bg-black"][class*="rounded"]');
-          if (logo && !header.querySelector('.jasper-text-added')) {
-            const textSpan = document.createElement('span');
-            textSpan.className = 'jasper-text-added';
-            textSpan.innerHTML = '<span class="jasper-part">jasper</span><span class="evangelista-part">evangelista</span>';
-            textSpan.style.cssText = `
-              display: inline-block !important;
-              margin-left: 10px !important;
-              font-size: 24px !important;
-              vertical-align: middle !important;
-            `;
+          // Find the logo in the header
+          const logo = header.querySelector('.bg-black.rounded-full') || 
+                      header.querySelector('[class*="bg-black"][class*="rounded"]') ||
+                      header.querySelector('img') ||
+                      header.querySelector('a[href="/"]');
+          
+          if (logo) {
+            // Check if jasperevangelista text already exists
+            let textExists = false;
+            const existingTexts = header.querySelectorAll('.jasper-text-added');
+            existingTexts.forEach(function(text) {
+              textExists = true;
+            });
             
-            // Insert after logo
-            if (logo.nextSibling) {
-              header.insertBefore(textSpan, logo.nextSibling);
-            } else {
-              header.appendChild(textSpan);
+            if (!textExists) {
+              // Create the text element
+              const textSpan = document.createElement('span');
+              textSpan.className = 'jasper-text-added';
+              textSpan.innerHTML = '<span class="jasper-part">jasper</span><span class="evangelista-part">evangelista</span>';
+              textSpan.style.cssText = `
+                display: inline-block !important;
+                margin-left: 10px !important;
+                font-size: 24px !important;
+                vertical-align: middle !important;
+              `;
+              
+              // Insert after logo
+              if (logo.nextSibling) {
+                header.insertBefore(textSpan, logo.nextSibling);
+              } else {
+                header.appendChild(textSpan);
+              }
+              console.log('Added "jasperevangelista" to header directly');
             }
-            console.log('Added "jasperevangelista" to header directly');
+          }
+        }
+        
+        // Method 5: Alternative approach - find any link at the top and add text
+        if (!document.querySelector('.jasper-text-added')) {
+          const allLinks = document.querySelectorAll('a');
+          for (let i = 0; i < allLinks.length; i++) {
+            const link = allLinks[i];
+            const rect = link.getBoundingClientRect();
+            
+            // Check if this link is in the top area
+            if (rect.top < 100 && rect.left < 200) {
+              // Create the text element
+              const textSpan = document.createElement('span');
+              textSpan.className = 'jasper-text-added';
+              textSpan.innerHTML = '<span class="jasper-part">jasper</span><span class="evangelista-part">evangelista</span>';
+              textSpan.style.cssText = `
+                display: inline-block !important;
+                margin-left: 10px !important;
+                font-size: 24px !important;
+                vertical-align: middle !important;
+                position: absolute !important;
+                top: 20px !important;
+                left: 150px !important;
+              `;
+              
+              // Add to body if all else fails
+              document.body.appendChild(textSpan);
+              console.log('Added "jasperevangelista" as absolute positioned element');
+              break;
+            }
           }
         }
       }
 
       // Run multiple times with longer duration
       let attempts = 0;
-      function tryFinalFixes() {
+      function tryFinalCorrections() {
         attempts++;
-        console.log(`Final fixes attempt ${attempts}`);
-        applyFinalFixes();
+        console.log(`Final corrections attempt ${attempts}`);
+        applyFinalCorrections();
         
-        if (attempts < 15) {
-          setTimeout(tryFinalFixes, 600);
+        if (attempts < 20) {
+          setTimeout(tryFinalCorrections, 500);
         }
       }
       
       // Start immediately and with multiple triggers
-      tryFinalFixes();
+      tryFinalCorrections();
       window.addEventListener('load', function() {
-        setTimeout(tryFinalFixes, 300);
-        setTimeout(tryFinalFixes, 1000);
-        setTimeout(tryFinalFixes, 2000);
+        setTimeout(tryFinalCorrections, 300);
+        setTimeout(tryFinalCorrections, 1000);
+        setTimeout(tryFinalCorrections, 2000);
+        setTimeout(tryFinalCorrections, 3000);
       });
       document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(tryFinalFixes, 300);
-        setTimeout(tryFinalFixes, 1000);
+        setTimeout(tryFinalCorrections, 300);
+        setTimeout(tryFinalCorrections, 1000);
+        setTimeout(tryFinalCorrections, 2000);
       });
     </script>
   </body>
