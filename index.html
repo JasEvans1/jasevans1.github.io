@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jasper Evangelista | The Brand Jedi</title>
+    <title>Jasper Evangelista | Creative Marketing Studio</title>
     <script type="module" crossorigin src="/assets/index-ti55cYL2.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ8q8.css">
     
-    <!-- Fixed CSS updates -->
+    <!-- Corrected CSS based on user feedback -->
     <style>
       /* Hide all black circles and JE text */
       .bg-black.rounded-full,
@@ -38,32 +38,31 @@
         transform: scale(1.5) !important; /* 300px effective size */
       }
       
-      /* Replace "Jasper Evangelista" text in upper left */
+      /* REMOVE "Jasper Evangelista" text completely */
       a[href="/"] {
         font-size: 0 !important; /* Hide original text */
-      }
-      
-      a[href="/"]:after {
-        content: 'jasperevangelista' !important;
-        display: inline-block !important;
-        font-size: 24px !important;
-        font-weight: normal !important;
-        text-indent: 0 !important;
-        letter-spacing: 0 !important;
-        white-space: nowrap !important;
-        background: linear-gradient(to right, 
-          #777777 0%, #777777 calc(5ch), /* "jasper" in gray */
-          #000000 calc(5ch), #000000 100%); /* "evangelista" in black */
-        -webkit-background-clip: text !important;
-        background-clip: text !important;
         color: transparent !important;
+        text-indent: -9999px !important;
       }
       
-      /* Reduce headline size by 25% */
+      /* INCREASE headline font size */
       h1, .text-5xl, .text-6xl, .text-7xl, 
       [class*="text-5xl"], [class*="text-6xl"], [class*="text-7xl"] {
-        font-size: 75% !important; /* 25% reduction */
+        font-size: 100% !important; /* Restore original size */
         line-height: 1.2 !important;
+      }
+      
+      /* Remove text from Home button area */
+      .bg-green-500, 
+      [class*="bg-green"],
+      a:contains("Home") {
+        position: relative;
+      }
+      
+      .bg-green-500 span,
+      [class*="bg-green"] span,
+      a:contains("Home") span {
+        display: none !important;
       }
     </style>
   </head>
@@ -71,9 +70,9 @@
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
     
-    <!-- Fixed JavaScript with correct text placement -->
+    <!-- Corrected JavaScript based on user feedback -->
     <script>
-      function applyFixedUpdates() {
+      function applyCorrections() {
         // Method 1: Replace all black circles with logo
         const circles = document.querySelectorAll('.bg-black.rounded-full, [class*="bg-black"][class*="rounded"]');
         circles.forEach(function(circle) {
@@ -112,65 +111,65 @@
               vertical-align: middle !important;
               position: relative !important;
             `;
-            console.log('3x bigger navigation logo applied');
+            
+            // Add jasperevangelista text BESIDE the logo
+            const parent = circle.parentElement;
+            if (parent && !parent.querySelector('.jasper-text')) {
+              const textSpan = document.createElement('span');
+              textSpan.className = 'jasper-text';
+              textSpan.innerHTML = '<span style="font-weight: normal; color: #777777;">jasper</span><span style="font-weight: bold; color: #000000;">evangelista</span>';
+              textSpan.style.cssText = `
+                display: inline-block !important;
+                margin-left: 10px !important;
+                font-size: 24px !important;
+                vertical-align: middle !important;
+              `;
+              
+              parent.insertBefore(textSpan, circle.nextSibling);
+              console.log('Added "jasperevangelista" BESIDE the logo');
+            }
           }
         });
         
-        // Method 2: Replace "Jasper Evangelista" text in upper left
+        // Method 2: REMOVE "Jasper Evangelista" text completely
         const headerLinks = document.querySelectorAll('a[href="/"]');
         headerLinks.forEach(function(link) {
-          // Check if this is the header link (not in footer, etc.)
-          const rect = link.getBoundingClientRect();
-          if (rect.top < window.innerHeight * 0.3) {
-            // This is the header link - replace text
-            link.innerHTML = '';
-            link.style.fontSize = '0';
-            
-            const textSpan = document.createElement('span');
-            textSpan.textContent = 'jasperevangelista';
-            textSpan.style.cssText = `
-              display: inline-block !important;
-              font-size: 24px !important;
-              font-weight: normal !important;
-              background: linear-gradient(to right, 
-                #777777 0%, #777777 calc(5ch), 
-                #000000 calc(5ch), #000000 100%);
-              -webkit-background-clip: text !important;
-              background-clip: text !important;
-              color: transparent !important;
-              white-space: nowrap !important;
-            `;
-            
-            link.appendChild(textSpan);
-            console.log('Replaced "Jasper Evangelista" with formatted "jasperevangelista"');
-          }
+          link.innerHTML = '';
+          link.style.fontSize = '0';
+          link.style.color = 'transparent';
+          link.style.textIndent = '-9999px';
+          console.log('Removed "Jasper Evangelista" text completely');
         });
         
-        // Method 3: Reduce headline size by 25%
-        const headlines = document.querySelectorAll('h1, .text-5xl, .text-6xl, .text-7xl, [class*="text-5xl"], [class*="text-6xl"], [class*="text-7xl"]');
-        headlines.forEach(function(headline) {
-          headline.style.fontSize = '75%';
-          headline.style.lineHeight = '1.2';
-          console.log('Headline size reduced by 25%');
+        // Method 3: Remove text from Home button area
+        const homeButtons = document.querySelectorAll('.bg-green-500, [class*="bg-green"], a:contains("Home")');
+        homeButtons.forEach(function(button) {
+          const spans = button.querySelectorAll('span');
+          spans.forEach(function(span) {
+            if (span.textContent.includes('jaspere')) {
+              span.style.display = 'none';
+              console.log('Removed text from Home button area');
+            }
+          });
         });
       }
 
       // Run multiple times
       let attempts = 0;
-      function tryUpdates() {
+      function tryCorrections() {
         attempts++;
-        console.log(`Fixed updates attempt ${attempts}`);
-        applyFixedUpdates();
+        console.log(`Corrections attempt ${attempts}`);
+        applyCorrections();
         
         if (attempts < 10) {
-          setTimeout(tryUpdates, 500);
+          setTimeout(tryCorrections, 500);
         }
       }
       
       // Start immediately
-      tryUpdates();
-      window.addEventListener('load', tryUpdates);
-      document.addEventListener('DOMContentLoaded', tryUpdates);
+      tryCorrections();
+      window.addEventListener('load', tryCorrections);
+      document.addEventListener('DOMContentLoaded', tryCorrections);
     </script>
   </body>
 </html>
