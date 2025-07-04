@@ -8,62 +8,90 @@
     <script type="module" crossorigin src="/assets/index-ti55cYL2.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-CEaPZ8q8.css">
     
-    <!-- CSS to remove black circles and show logo -->
+    <!-- Direct CSS logo replacement -->
     <style>
-      /* Hide the black circle containers */
-      .bg-black.rounded-full {
+      /* Hide all black circles and JE text */
+      .bg-black.rounded-full,
+      .bg-black.rounded-full * {
         background: transparent !important;
-        border: none !important;
-        position: relative !important;
+        color: transparent !important;
+        text-indent: -9999px !important;
       }
       
-      /* Hide the JE text */
-      .bg-black.rounded-full span {
-        display: none !important;
-      }
-      
-      /* Show your logo instead */
-      .bg-black.rounded-full::before {
-        content: '' !important;
-        position: absolute !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
+      /* Show logo image directly */
+      .bg-black.rounded-full {
+        background-image: url('jaslogowebsite.png') !important;
+        background-size: 80% 80% !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
         width: 40px !important;
         height: 40px !important;
-        background-image: url('/jaslogowebsite.png') !important;
-        background-size: contain !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        display: block !important;
-      }
-      
-      /* Larger logo for loading screen */
-      .bg-black.rounded-full:first-of-type::before {
-        width: 80px !important;
-        height: 80px !important;
-      }
-      
-      /* Add pulse animation to the logo */
-      .bg-black.rounded-full::before {
-        animation: logoPulse 2s ease-in-out infinite !important;
-      }
-      
-      @keyframes logoPulse {
-        0%, 100% { 
-          transform: translate(-50%, -50%) scale(1) !important;
-          opacity: 1 !important;
-        }
-        50% { 
-          transform: translate(-50%, -50%) scale(1.1) !important;
-          opacity: 0.8 !important;
-        }
+        display: inline-block !important;
       }
     </style>
   </head>
   <body>
     <div id="root"></div>
     <script src="audio-menu-injection.js"></script>
+    
+    <!-- Aggressive JavaScript replacement -->
+    <script>
+      function forceLogoDisplay() {
+        // Method 1: Replace all black circles with logo
+        const circles = document.querySelectorAll('.bg-black.rounded-full, [class*="bg-black"][class*="rounded"]');
+        circles.forEach(function(circle) {
+          circle.style.cssText = `
+            background-image: url('jaslogowebsite.png') !important;
+            background-size: 80% 80% !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-color: transparent !important;
+            width: 40px !important;
+            height: 40px !important;
+            display: inline-block !important;
+          `;
+          circle.innerHTML = '';
+          console.log('Circle replaced with logo background');
+        });
+        
+        // Method 2: Find and replace JE text directly
+        const walker = document.createTreeWalker(
+          document.body,
+          NodeFilter.SHOW_TEXT,
+          null,
+          false
+        );
+        
+        let node;
+        while (node = walker.nextNode()) {
+          if (node.textContent.trim() === 'JE') {
+            const img = document.createElement('img');
+            img.src = 'jaslogowebsite.png';
+            img.style.cssText = 'width: 32px; height: 32px; display: inline-block;';
+            node.parentNode.replaceChild(img, node);
+            console.log('JE text replaced with logo image');
+            break;
+          }
+        }
+      }
+
+      // Run multiple times
+      let attempts = 0;
+      function tryReplace() {
+        attempts++;
+        console.log(`Logo replacement attempt ${attempts}`);
+        forceLogoDisplay();
+        
+        if (attempts < 10) {
+          setTimeout(tryReplace, 500);
+        }
+      }
+      
+      // Start immediately
+      tryReplace();
+      window.addEventListener('load', tryReplace);
+      document.addEventListener('DOMContentLoaded', tryReplace);
+    </script>
   </body>
 </html>
 
